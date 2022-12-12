@@ -39,7 +39,7 @@ Uživatelé a činnosti, které uložili do aplikace ukládáme do SQL databáze
  jejíž hosting jsme zajistili pomocí AWS. Konkrétně se tedy jedná o PostgreSQL.
 Na obrázku níže je zobrazen konceptuální model databáze.
 
-![db_konceptualni_model](https://gitlab.com/-/ide/project/FIS-VSE/4IT115/2022ZS/ct0730/marl33/tymova-seminarni-prace/tree/main/-/db_konceptualni_model.png/)
+![db_konceptualni_model](https://gitlab.com/FIS-VSE/4IT115/2022ZS/ct0730/marl33/tymova-seminarni-prace/-/raw/a4ecadcc50747ef3bdcf3b0ea3f0c38acd4c15f6/db_konceptualni_model.png)
 
 ## Prototyp aplikace
 
