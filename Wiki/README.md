@@ -43,6 +43,12 @@ Na obrázku níže je zobrazen konceptuální model databáze.
 
 ## Prototyp aplikace
 
+Prototyp aplikace byl vytvořen využitím [Figmy](https://www.figma.com/).
+Prototyp jsme navrhovali s částečně proklikávacím wireframem a vizualizačně se jedná o High-fidelity prototyp, tudíž by měl být blízko finální vizualizaci.
+
+Prototyp k dispozici [zde](https://www.figma.com/proto/83W16TIWeS9oYJuCoS66IR/DAMARE?node-id=2%3A980&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=2%3A980&show-proto-sidebar=1)
+
+K testování prototypu zatím nedošlo, nicméně poprosíme samotné čtenáře o zpětnou vazbu.
 
 ## Testovací případy
 
