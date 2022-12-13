@@ -27,19 +27,29 @@ Aplikace Damare je určena pro sebe-organizaci a vylepšení celkové produktivi
 - Jako "Saskia Burešová" chci nastavovat data jednotlivým úkolům, aby se mi zobrazovali v mém kalendáři.
 
 ## Návrh aplikace
-UML modelů
 
-diagram případů užití (včetně slovního popisu dle MMSP)
-diagram tříd na designové úrovni
-další UML modely za každého člena týmu (individuální práce)
+### Diagram případů užití
+![usecase_diagram](https://gitlab.com/-/ide/project/FIS-VSE/4IT115/2022ZS/ct0730/marl33/tymova-seminarni-prace/tree/main/-/Wiki/usecase_diagram.png/)
+1. Hrubý popis
+ - Na diagramu můžeme vidět, že uživatel může aplikaci používat 3 případy.
+2. Scénáře
+ - Setting tasks
+ - Completing tasks
+ - Competing
+3. Detailní popis scénářů
+ - Setting tasks - Uživatel může vytvářet úkoly. Těmto úkolů jsem dále nastavit jméno, místo a čas splnění, důležitost, psát k nim další poznámky nebo je řadit do kategorií.
+ - Completing tasks - Pokud uživatel úkol dokončí může ho jednoduše označit za splněný.
+ - Competing - Uživatel může také soutěžit s jinými uživatele v tom, kdo má více splněných úkolů.
 
+### Diagram tříd
+![diagram_trid](https://gitlab.com/-/ide/project/FIS-VSE/4IT115/2022ZS/ct0730/marl33/tymova-seminarni-prace/tree/main/-/Wiki/diagram_trid.png/)
 
 ### Databáze
 Uživatelé a činnosti, které uložili do aplikace ukládáme do SQL databáze,
  jejíž hosting jsme zajistili pomocí AWS. Konkrétně se tedy jedná o PostgreSQL.
 Na obrázku níže je zobrazen konceptuální model databáze.
 
-![db_konceptualni_model](https://gitlab.com/FIS-VSE/4IT115/2022ZS/ct0730/marl33/tymova-seminarni-prace/-/raw/a4ecadcc50747ef3bdcf3b0ea3f0c38acd4c15f6/db_konceptualni_model.png)
+![db_konceptualni_model](https://gitlab.com/-/ide/project/FIS-VSE/4IT115/2022ZS/ct0730/marl33/tymova-seminarni-prace/tree/main/-/Wiki/db_konceptualni_model.png/)
 
 ## Prototyp aplikace
 
@@ -62,4 +72,6 @@ K testování prototypu zatím nedošlo, nicméně poprosíme samotné čtenář
 
 ## Projektový board a workflow
 
-Pro organizaci využíváme aplikaci [Notion](https://www.notion.so/).
+ - Pro organizaci využíváme aplikaci [Notion](https://www.notion.so/).
+
+ - Pro vývoj aplikace bude využívána větev "dev" a pro její ostré nasazení větev "master". 
