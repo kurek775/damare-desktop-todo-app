@@ -73,5 +73,9 @@ K testování prototypu zatím nedošlo, nicméně poprosíme samotné čtenář
 ## Projektový board a workflow
 
  - Pro organizaci využíváme aplikaci [Notion](https://www.notion.so/).
+ - Nasadili jsme agilní metodiku zjednodušeného SCRUMu. To pro nás znamená, že jsme na začátek vytvořili backlog, vytvořili jsme skupinu úkolů, jež se rozdělí na menší. Délku sprintů máme nastavenou na 12 dnů. Ve SCRUMu jsou obvyklé 15min. standupy, jež se odehrávají každý den. Standupy, jsme se rozhodli zachovat, ovšem po každých 3 dnech, kdy během sprintu by se měly odehrát 4 pro kontrolu práce. Princip standupu jsme se rozhodli udržet, abychom měli lepší přehled, jak zadaná část ve sprintu vyvyjí.
+ 
+    - Prozatimně organizujeme veškerou spolupráci přes Kanban vytvořený právě v Notionu.
+    ![Kanban](./Kanban.JPG)
 
  - Pro vývoj aplikace bude využívána větev "dev" a pro její ostré nasazení větev "master". 
