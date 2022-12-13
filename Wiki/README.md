@@ -29,7 +29,7 @@ Aplikace Damare je určena pro sebe-organizaci a vylepšení celkové produktivi
 ## Návrh aplikace
 
 ### Diagram případů užití
-![usecase_diagram](https://gitlab.com/-/ide/project/FIS-VSE/4IT115/2022ZS/ct0730/marl33/tymova-seminarni-prace/tree/main/-/Wiki/usecase_diagram.png/)
+![usecase_diagram](./usecase_diagram.png)
 1. Hrubý popis
  - Na diagramu můžeme vidět, že uživatel může aplikaci používat 3 případy.
 2. Scénáře
@@ -42,14 +42,14 @@ Aplikace Damare je určena pro sebe-organizaci a vylepšení celkové produktivi
  - Competing - Uživatel může také soutěžit s jinými uživatele v tom, kdo má více splněných úkolů.
 
 ### Diagram tříd
-![diagram_trid](https://gitlab.com/-/ide/project/FIS-VSE/4IT115/2022ZS/ct0730/marl33/tymova-seminarni-prace/tree/main/-/Wiki/diagram_trid.png/)
+![diagram_trid](./diagram_trid.png)
 
 ### Databáze
 Uživatelé a činnosti, které uložili do aplikace ukládáme do SQL databáze,
  jejíž hosting jsme zajistili pomocí AWS. Konkrétně se tedy jedná o PostgreSQL.
 Na obrázku níže je zobrazen konceptuální model databáze.
 
-![db_konceptualni_model](https://gitlab.com/-/ide/project/FIS-VSE/4IT115/2022ZS/ct0730/marl33/tymova-seminarni-prace/tree/main/-/Wiki/db_konceptualni_model.png/)
+![db_konceptualni_model](./db_konceptualni_model.png)
 
 ## Prototyp aplikace
 
