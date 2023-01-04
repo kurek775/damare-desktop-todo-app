@@ -16,13 +16,25 @@ public class LoginController {
     @FXML
     private TextField passwordField;
 
-
+    @FXML
+    private ListView<String> userView;
+    @FXML
+    private void initialize() {
+        getUsers();
+    }
 
     @FXML
     protected void onRegisterButtonClick() {
         db.insertRow(conn,"users",nameField.getText(),emailField.getText(),passwordField.getText());
 
     }
+
+    private void getUsers() {
+
+      db.readData(conn,"users");
+
+    }
+
 
 
 }

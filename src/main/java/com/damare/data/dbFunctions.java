@@ -1,5 +1,6 @@
 package com.damare.data;
 import java.sql.*;
+import org.json.JSONObject;
 public class dbFunctions {
     public Connection connectDb(String dbname,String user,String pass){
         Connection conn=null;
@@ -48,11 +49,19 @@ public class dbFunctions {
             String query=String.format("select * from %s",table_name);
             statement=conn.createStatement();
             rs=statement.executeQuery(query);
+          /*  JSONObject jo = new JSONObject();*/
             while(rs.next()){
-                System.out.print(rs.getString("empid")+" ");
+              /*  jo.put("id", rs.getString("id"));
+                jo.put("name", rs.getString("name"));
+                jo.put("email", rs.getString("email"));
+                jo.put("password", rs.getString("password"));*/
+
+             System.out.print(rs.getString("id")+" ");
                 System.out.print(rs.getString("name")+" ");
-                System.out.println(rs.getString("Address")+" ");
+                System.out.println(rs.getString("email")+" ");
+                System.out.println(rs.getString("password")+" ");
             }
+           /* System.out.println(jo);*/
 
         }
         catch (Exception e){
