@@ -1,19 +1,12 @@
 package com.damare.model;
-
 import com.damare.data.dbFunctions;
-import com.damare.main.registerController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import org.json.JSONObject;
-
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
