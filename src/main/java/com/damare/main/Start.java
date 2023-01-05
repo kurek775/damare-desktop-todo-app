@@ -19,7 +19,7 @@ public class Start extends Application {
         fxmlLoader.load();
         Scene scene = new Scene(fxmlLoader.getRoot());
         stage.setScene(scene);
-        stage.setTitle("Login");
+        stage.setTitle("login");
         stage.show();
 
 

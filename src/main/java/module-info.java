@@ -6,6 +6,7 @@ module com.damare{
     requires java.sql;
     requires org.json;
 
+
     opens com.damare.main to javafx.fxml;
     exports com.damare.main;
 
