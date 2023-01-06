@@ -1,5 +1,6 @@
 package com.damare.main;
 
+import com.damare.model.User;
 import com.damare.model.controllerUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,7 +48,8 @@ public class registerController {
             System.out.println("NAH");
         }
         else{
-            controllerUtils.addUser(nameField.getText(),emailField.getText(),passwordField.getText());
+            User user = new User(null,nameField.getText(),emailField.getText(),passwordField.getText(),null);
+            controllerUtils.addUser(user);
 
         }
 

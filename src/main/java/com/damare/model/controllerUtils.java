@@ -28,11 +28,40 @@ public class controllerUtils {
     }
 
 
-    public static void addUser(String uname, String email, String password) {
+    public static void addUser(User user) {
         dbFunctions db = new dbFunctions();
         Connection conn = db.connectDb("Test", "postgre", "Damare123");
-        db.insertUserRow(conn,uname, email, password);
+        db.insertUserRow(conn,user);
 
+    }
+
+    public static void updateUser(User user) {
+        dbFunctions db = new dbFunctions();
+        Connection conn = db.connectDb("Test", "postgre", "Damare123");
+        db.updateUserRow(conn,user);
+
+    }
+
+    public void addTask(Task task){
+        dbFunctions db = new dbFunctions();
+        Connection conn = db.connectDb("Test", "postgre", "Damare123");
+        db.insertTaskRow(conn,task);
+    }
+    public static void updateTask(Task task){
+        dbFunctions db = new dbFunctions();
+        Connection conn = db.connectDb("Test", "postgre", "Damare123");
+        db.updateTaskRow(conn,task);
+    }
+
+    public static void viewTasks(Integer usrId){
+        dbFunctions db = new dbFunctions();
+        Connection conn = db.connectDb("Test", "postgre", "Damare123");
+       db.readAllTasks(conn,usrId);
+    }
+    public static void removeRow(String table, Integer id){
+        dbFunctions db = new dbFunctions();
+        Connection conn = db.connectDb("Test", "postgre", "Damare123");
+        db.deleteRowById(conn,table,id);
     }
 
 

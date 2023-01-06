@@ -2,6 +2,8 @@ package com.damare.data;
 
 import java.sql.*;
 
+import com.damare.model.Task;
+import com.damare.model.User;
 import org.json.JSONObject;
 
 public class dbFunctions {
@@ -23,10 +25,10 @@ public class dbFunctions {
     }
 
 
-    public void insertUserRow(Connection conn,String name, String email, String password) {
+    public void insertUserRow(Connection conn, User user) {
         Statement statement;
         try {
-            String query = String.format("insert into users(name,email,password) values('%s','%s','%s');",name, email, password);
+            String query = String.format("insert into users(name,email,password) values('%s','%s','%s');",user.getName(), user.getEmail(), user.getPassword());
             statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Row Inserted");
@@ -43,27 +45,14 @@ public class dbFunctions {
         }
     }
 
-    public void readData(Connection conn, String table_name) {
+    public void insertTaskRow(Connection conn, Task task){
         Statement statement;
-        ResultSet rs = null;
         try {
-            String query = String.format("select * from %s", table_name);
+            String query = String.format("insert into tasks(catid, userid, importance, duration, name, place, description, date , status ) values('%s','%s','%s','%s','%s','%s','%s','%s','%s');"
+                    ,task.getCatId(),task.getUserId(),task.getImportance(),task.getDuration(),task.getName(),task.getPlace(),task.getDescription(), task.getDate(),task.getStatus());
             statement = conn.createStatement();
-            rs = statement.executeQuery(query);
-            /*  JSONObject jo = new JSONObject();*/
-            while (rs.next()) {
-              /*  jo.put("id", rs.getString("id"));
-                jo.put("name", rs.getString("name"));
-                jo.put("email", rs.getString("email"));
-                jo.put("password", rs.getString("password"));*/
-
-                System.out.print(rs.getString("id") + " ");
-                System.out.print(rs.getString("name") + " ");
-                System.out.println(rs.getString("email") + " ");
-                System.out.println(rs.getString("password") + " ");
-            }
-            /* System.out.println(jo);*/
-
+            statement.executeUpdate(query);
+            System.out.println("Row Inserted");
         } catch (Exception e) {
             System.out.println(e);
         } finally {
@@ -77,10 +66,32 @@ public class dbFunctions {
         }
     }
 
-    public void updateName(Connection conn, String table_name, String old_name, String new_name) {
+    public void updateTaskRow(Connection conn, Task task){
         Statement statement;
         try {
-            String query = String.format("update %s set name='%s' where name='%s'", table_name, new_name, old_name);
+            String query = String.format("update tasks set catid='%s', userid='%s' , importance='%s' , duration='%s' , name='%s' , place='%s' , description='%s' , date='%s' , status='%s' where id='%s';"
+                    ,task.getCatId(),task.getUserId(),task.getImportance(),task.getDuration(),task.getName(),task.getPlace(),task.getDescription(), task.getDate(),task.getStatus(),task.getId());
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Row Updated");
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void updateUserRow(Connection conn,User user) {
+        Statement statement;
+        try {
+            String query = String.format("update users set name='%s',email='%s',password='%s' where id='%s'",
+                    user.getName(), user.getEmail(),user.getPassword(), user.getId());
             statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Data Updated");
@@ -96,7 +107,27 @@ public class dbFunctions {
             }
         }
     }
-
+    /*
+    public void readAllTasks(Connection conn, Integer usrId){
+        Statement statement;
+        try {
+            String query = String.format("select * from tasks where userid= %s",usrId);
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Row Inserted");
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+*/
 
     public JSONObject searchById(Connection conn, String table_name, int id) {
         Statement statement;
@@ -161,7 +192,7 @@ public class dbFunctions {
         return usr;
     }
 
-
+/* ALL  */
     public void deleteRowById(Connection conn, String table_name, int id) {
         Statement statement;
         try {
