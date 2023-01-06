@@ -6,11 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.damare.main.addTaskController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<?import javafx.geometry.Insets?>
+<VBox alignment="CENTER" spacing="80.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.damare.main.addTaskController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
     <children>
         <Label text="name"></Label>
         <TextField fx:id="nameField"/>
@@ -22,5 +24,9 @@
 
 
     </children>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+    </padding>
 
-</AnchorPane>
+
+</VBox>

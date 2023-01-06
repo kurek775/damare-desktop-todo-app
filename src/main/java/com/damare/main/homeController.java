@@ -33,9 +33,8 @@ public class homeController {
     private void initialize() {
         this.state = getInstance();
         User currentUser = applicationState.getInstance().getCurrentlyLoggedUser();
-        helloUser.setText(currentUser.getName());
+        helloUser.setText("Hello " + currentUser.getName());
 
-        System.out.println(currentUser.getName());
         logoutBtn.setStyle("-fx-background-color: #B0266B;");
     }
 
