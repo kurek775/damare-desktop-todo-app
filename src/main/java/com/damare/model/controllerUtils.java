@@ -14,6 +14,7 @@ import java.util.List;
 
 public class controllerUtils {
 
+
     public static User currentUser(Integer id) {
         dbFunctions db = new dbFunctions();
         List<Integer> friendlist = new ArrayList<>();
@@ -30,7 +31,7 @@ public class controllerUtils {
     public static void addUser(String uname, String email, String password) {
         dbFunctions db = new dbFunctions();
         Connection conn = db.connectDb("Test", "postgre", "Damare123");
-        db.insertRow(conn, "users", uname, email, password);
+        db.insertUserRow(conn,uname, email, password);
 
     }
 

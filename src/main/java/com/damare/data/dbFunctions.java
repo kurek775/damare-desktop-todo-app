@@ -23,10 +23,10 @@ public class dbFunctions {
     }
 
 
-    public void insertRow(Connection conn, String table_name, String name, String email, String password) {
+    public void insertUserRow(Connection conn,String name, String email, String password) {
         Statement statement;
         try {
-            String query = String.format("insert into %s(name,email,password) values('%s','%s','%s');", table_name, name, email, password);
+            String query = String.format("insert into users(name,email,password) values('%s','%s','%s');",name, email, password);
             statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Row Inserted");

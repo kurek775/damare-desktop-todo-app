@@ -1,6 +1,9 @@
 package com.damare.main;
 
 import com.damare.data.dbFunctions;
+import com.damare.model.applicationState;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -10,8 +13,12 @@ import javafx.fxml.*;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import com.damare.model.controllerUtils;
-
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.sql.Connection;
 
 public class loginController {
@@ -29,11 +36,15 @@ public class loginController {
     private Button registerBtn;
 
     @FXML
+
+    private  Button btn;
+    @FXML
     private void initialize() {
 
 
         loginBtn.setStyle("-fx-background-color: #00ff00;");
         registerBtn.setStyle("-fx-background-color: #B0266B;");
+
     }
 
     @FXML
@@ -41,19 +52,18 @@ public class loginController {
         Integer id = controllerUtils.loginUser(unameEmailField.getText(), passwordField.getText(), (Stage) loginBtn.getScene().getWindow());
         if (id != null) {
             try {
-                System.out.println(controllerUtils.currentUser(id).getName());
-                // Load the FXML file for the new controller
+                applicationState.getInstance().setCurrentlyLoggedUser(controllerUtils.currentUser(id));
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
                 Parent root = loader.load();
                 homeController homeController = loader.getController();
 
-                // Get the current stage
+
                 Stage stage = (Stage) loginBtn.getScene().getWindow();
 
-                // Set the new scene on the stage
                 stage.setScene(new Scene(root));
             } catch (IOException ex) {
-                // Handle exception
+
             }
         }
         else{
