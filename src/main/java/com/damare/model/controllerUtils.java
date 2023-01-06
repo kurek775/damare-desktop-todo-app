@@ -52,12 +52,12 @@ public class controllerUtils {
         Connection conn = db.connectDb("Test", "postgre", "Damare123");
         db.updateTaskRow(conn,task);
     }
-
+/*
     public static void viewTasks(Integer usrId){
         dbFunctions db = new dbFunctions();
         Connection conn = db.connectDb("Test", "postgre", "Damare123");
        db.readAllTasks(conn,usrId);
-    }
+    }*/
     public static void removeRow(String table, Integer id){
         dbFunctions db = new dbFunctions();
         Connection conn = db.connectDb("Test", "postgre", "Damare123");
