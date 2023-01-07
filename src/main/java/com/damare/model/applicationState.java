@@ -6,6 +6,8 @@ public class applicationState {
 
     private User currentlyLoggedUser = null;
 
+    private Task currentlyEditedTask= null;
+
     private applicationState() {
 
     }
@@ -25,5 +27,14 @@ public class applicationState {
     public void setCurrentlyLoggedUser(User currentlyLoggedUser) {
 
         this.currentlyLoggedUser = currentlyLoggedUser;
+    }
+
+    public Task getCurrentlyEditedTask() {
+        return this.currentlyEditedTask;
+    }
+
+    public void setCurrentlyEditedTask(Task currentlyEditedTask) {
+
+        this.currentlyEditedTask = currentlyEditedTask;
     }
 }

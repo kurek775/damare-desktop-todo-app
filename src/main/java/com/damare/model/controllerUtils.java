@@ -19,8 +19,8 @@ public class controllerUtils {
         dbFunctions db = new dbFunctions();
         List<Integer> friendlist = new ArrayList<>();
         friendlist.add(2);
-        Connection conn = db.connectDb("Test", "postgre", "Damare123");
-        JSONObject usr = (db.searchById(conn, "users", id));
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+        JSONObject usr = (db.searchUsersById(conn, id));
         User current = new User(usr.getInt("id"), usr.getString("name"), usr.getString("email"), usr.getString("password"),
                 friendlist);
 
@@ -30,26 +30,26 @@ public class controllerUtils {
 
     public static void addUser(User user) {
         dbFunctions db = new dbFunctions();
-        Connection conn = db.connectDb("Test", "postgre", "Damare123");
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
         db.insertUserRow(conn,user);
 
     }
 
     public static void updateUser(User user) {
         dbFunctions db = new dbFunctions();
-        Connection conn = db.connectDb("Test", "postgre", "Damare123");
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
         db.updateUserRow(conn,user);
 
     }
 
     public static void addTask(Task task){
         dbFunctions db = new dbFunctions();
-        Connection conn = db.connectDb("Test", "postgre", "Damare123");
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
         db.insertTaskRow(conn,task);
     }
     public static void updateTask(Task task){
         dbFunctions db = new dbFunctions();
-        Connection conn = db.connectDb("Test", "postgre", "Damare123");
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
         db.updateTaskRow(conn,task);
     }
 /*
@@ -60,7 +60,7 @@ public class controllerUtils {
     }*/
     public static void removeRow(String table, Integer id){
         dbFunctions db = new dbFunctions();
-        Connection conn = db.connectDb("Test", "postgre", "Damare123");
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
         db.deleteRowById(conn,table,id);
     }
 
@@ -68,8 +68,8 @@ public class controllerUtils {
     public static Integer loginUser(String lname, String password, Stage stage) {
         dbFunctions db = new dbFunctions();
         Integer rt = null;
-        Connection conn = db.connectDb("Test", "postgre", "Damare123");
-        JSONObject usr = (db.searchByNameOrMail(conn, "users", lname));
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+        JSONObject usr = (db.searchByNameOrMail(conn, lname));
         if (usr.isEmpty()) {
 
             showPopup(stage, "Uživatel nebyl nalezen");

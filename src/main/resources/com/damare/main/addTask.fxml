@@ -1,39 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<?import javafx.geometry.Insets?>
-<VBox alignment="CENTER" spacing="10.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.damare.main.addTaskController">
+<VBox alignment="CENTER" prefHeight="587.0" prefWidth="473.0" spacing="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.damare.main.addTaskController">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
     <children>
-        <Label text="name"></Label>
-        <TextField fx:id="nameField"/>
-        <Label text="importance"></Label>
-        <TextField fx:id="importanceField"/>
-        <Label text="duration"></Label>
-        <TextField fx:id="durationField"/>
-        <Label text="place"></Label>
-        <TextField fx:id="placeField"/>
-        <Label text="category"></Label>
-        <TextField fx:id="catIdField"/>
-        <Label text="description"></Label>
-        <TextField fx:id="descriptionField"/>
-        <Label text="date"></Label>
-        <DatePicker fx:id="dateField"/>
-        <Button fx:id="addBtn" text="Přidat" onAction="#onAddButtonClick"/>
+        <Label text="name" />
+        <TextField fx:id="nameField" />
+        <Label text="importance" />
+        <TextField fx:id="importanceField" />
+        <Label text="duration" />
+        <TextField fx:id="durationField" />
+        <Label text="place" />
+        <TextField fx:id="placeField" />
+        <Label text="category" />
+        <TextField fx:id="catIdField" />
+        <Label text="description" />
+        <TextField fx:id="descriptionField" />
+        <Label text="date" />
+        <DatePicker fx:id="dateField" />
+        <Button fx:id="addBtn" onAction="#onAddButtonClick" text="Přidat" />
 
 
     </children>
     <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </padding>
 
 

@@ -71,4 +71,22 @@ public class homeController {
             // Handle exception
         }
     }
+
+    @FXML
+    protected void toUpdateUser() {
+        try {
+            // Load the FXML file for the new controller
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("updateUser.fxml"));
+            Parent root = loader.load();
+            updateUserController updateusercontroller = loader.getController();
+
+            // Get the current stage
+            Stage stage = (Stage) logoutBtn.getScene().getWindow();
+
+            // Set the new scene on the stage
+            stage.setScene(new Scene(root));
+        } catch (IOException ex) {
+            // Handle exception
+        }
+    }
 }
