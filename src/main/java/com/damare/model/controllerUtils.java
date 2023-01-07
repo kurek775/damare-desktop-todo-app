@@ -42,7 +42,7 @@ public class controllerUtils {
 
     }
 
-    public void addTask(Task task){
+    public static void addTask(Task task){
         dbFunctions db = new dbFunctions();
         Connection conn = db.connectDb("Test", "postgre", "Damare123");
         db.insertTaskRow(conn,task);

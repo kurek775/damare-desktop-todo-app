@@ -19,7 +19,7 @@ public class Task {
     public Task(Integer id, Integer catId,
                 Integer userId, Integer importance,
                 Integer duration, String name,
-                String place, String note,
+                String place, 
                 String description, Date date,
                 Boolean status) {
         this.id = id;

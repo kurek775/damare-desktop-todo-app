@@ -8,7 +8,7 @@
 
 
 <?import javafx.geometry.Insets?>
-<VBox alignment="CENTER" spacing="80.0" xmlns:fx="http://javafx.com/fxml"
+<VBox alignment="CENTER" spacing="10.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.damare.main.addTaskController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
@@ -20,7 +20,15 @@
         <TextField fx:id="importanceField"/>
         <Label text="duration"></Label>
         <TextField fx:id="durationField"/>
-        <Button fx:id="addBtn" text="Přidat"/>
+        <Label text="place"></Label>
+        <TextField fx:id="placeField"/>
+        <Label text="category"></Label>
+        <TextField fx:id="catIdField"/>
+        <Label text="description"></Label>
+        <TextField fx:id="descriptionField"/>
+        <Label text="date"></Label>
+        <DatePicker fx:id="dateField"/>
+        <Button fx:id="addBtn" text="Přidat" onAction="#onAddButtonClick"/>
 
 
     </children>
