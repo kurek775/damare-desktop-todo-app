@@ -1,6 +1,8 @@
 package com.damare.data;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.damare.model.Task;
 import com.damare.model.User;
@@ -28,7 +30,7 @@ public class dbFunctions {
     public void insertUserRow(Connection conn, User user) {
         Statement statement;
         try {
-            String query = String.format("insert into devel_user(username,user_email,user_passwd) values('%s','%s','%s');",user.getName(), user.getEmail(), user.getPassword());
+            String query = String.format("insert into devel_user(username,user_email,user_passwd) values('%s','%s','%s');", user.getName(), user.getEmail(), user.getPassword());
             statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Row Inserted");
@@ -45,11 +47,11 @@ public class dbFunctions {
         }
     }
 
-    public void insertTaskRow(Connection conn, Task task){
+    public void insertTaskRow(Connection conn, Task task) {
         Statement statement;
         try {
             String query = String.format("insert into devel_task(task_category_id, task_user_id, task_importance, task_duration, task_name, task_place, task_desc, task_date , task_finished ) values('%s','%s','%s','%s','%s','%s','%s','%s','%s');"
-                    ,task.getCatId(),task.getUserId(),task.getImportance(),task.getDuration(),task.getName(),task.getPlace(),task.getDescription(), task.getDate(),task.getStatus());
+                    , task.getCatId(), task.getUserId(), task.getImportance(), task.getDuration(), task.getName(), task.getPlace(), task.getDescription(), task.getDate(), task.getStatus());
             statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Row Inserted");
@@ -66,11 +68,11 @@ public class dbFunctions {
         }
     }
 
-    public void updateTaskRow(Connection conn, Task task){
+    public void updateTaskRow(Connection conn, Task task) {
         Statement statement;
         try {
             String query = String.format("update devel_task set task_category_id='%s', task_user_id='%s' , task_importance='%s' , task_duration='%s' , task_name='%s' , task_place='%s' , task_desc='%s' , task_date='%s' , task_finished='%s' where task_id='%s';"
-                    ,task.getCatId(),task.getUserId(),task.getImportance(),task.getDuration(),task.getName(),task.getPlace(),task.getDescription(), task.getDate(),task.getStatus(),task.getId());
+                    , task.getCatId(), task.getUserId(), task.getImportance(), task.getDuration(), task.getName(), task.getPlace(), task.getDescription(), task.getDate(), task.getStatus(), task.getId());
             statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Row Updated");
@@ -87,11 +89,11 @@ public class dbFunctions {
         }
     }
 
-    public void updateUserRow(Connection conn,User user) {
+    public void updateUserRow(Connection conn, User user) {
         Statement statement;
         try {
             String query = String.format("update devel_user set username='%s',user_email='%s',user_passwd='%s' where user_id='%s'",
-                    user.getName(), user.getEmail(),user.getPassword(), user.getId());
+                    user.getName(), user.getEmail(), user.getPassword(), user.getId());
             statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Data Updated");
@@ -107,6 +109,7 @@ public class dbFunctions {
             }
         }
     }
+
     /*
     public void readAllTasks(Connection conn, Integer usrId){
         Statement statement;
@@ -128,8 +131,8 @@ public class dbFunctions {
         }
     }
 */
-
-    public JSONObject searchUsersById(Connection conn,int id) {
+    /* TODO -> vracet rovnou celého USERA*/
+    public JSONObject searchUsersById(Connection conn, int id) {
         Statement statement;
         JSONObject usr = new JSONObject();
         ResultSet rs = null;
@@ -160,6 +163,7 @@ public class dbFunctions {
         return usr;
     }
 
+    /* TODO -> vracet rovnou celého USERA*/
     public JSONObject searchByNameOrMail(Connection conn, String name) {
         Statement statement;
         JSONObject usr = new JSONObject();
@@ -192,11 +196,48 @@ public class dbFunctions {
         return usr;
     }
 
-/* ALL  */
-    public void deleteRowById(Connection conn, String table_name, int id) {
+    public List<Task> readAllTasks(Connection conn, Integer id) {
+        Statement statement;
+        List<Task> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+
+            String query = String.format("select * from devel_task where task_user_id= %s", id);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            Integer i = 0;
+            while (rs.next()) {
+
+                Task tsk = new Task(rs.getInt("task_id"), rs.getInt("task_category_id"),
+                        rs.getInt("task_user_id"), rs.getInt("task_importance"),
+                        rs.getInt("task_duration"), rs.getString("task_name"),
+                        rs.getString("task_place"), rs.getString("task_desc"),
+                        rs.getDate("task_date"), rs.getBoolean("task_finished")
+
+                );
+                list.add(i, tsk);
+                i++;
+            }
+            return list;
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return list;
+    }
+
+    /* ALL  */
+    public void deleteRowByAnything(Connection conn, String table_name, String cellname, int id) {
         Statement statement;
         try {
-            String query = String.format("delete from %s where id= %s", table_name, id);
+            String query = String.format("delete from %s where %s= %s", table_name, cellname, id);
             statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Data Deleted");

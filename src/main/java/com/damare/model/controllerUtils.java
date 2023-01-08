@@ -52,16 +52,18 @@ public class controllerUtils {
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
         db.updateTaskRow(conn,task);
     }
-/*
-    public static void viewTasks(Integer usrId){
-        dbFunctions db = new dbFunctions();
-        Connection conn = db.connectDb("Test", "postgre", "Damare123");
-       db.readAllTasks(conn,usrId);
-    }*/
-    public static void removeRow(String table, Integer id){
+
+    public static List<Task> viewTasks(Integer id){
         dbFunctions db = new dbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-        db.deleteRowById(conn,table,id);
+
+        return db.readAllTasks(conn,id);
+
+    }
+    public static void removeTask(Integer id){
+        dbFunctions db = new dbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+        db.deleteRowByAnything(conn,"devel_task","task_id",id);
     }
 
 
