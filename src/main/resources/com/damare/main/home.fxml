@@ -15,6 +15,7 @@
     <ListView fx:id="taskListView" minWidth="150.0" minHeight="300" onMouseClicked="#clickOnLoadedTask" />
     <Button fx:id="logoutBtn" onAction="#toLogin" text="Logout" />
     <Button fx:id="addTaskBtn" onAction="#toAddTask" text="Add task" />
+    <Button fx:id="addCategoryBtn" onAction="#toAddCategory" text="Add category" />
     <Button fx:id="updateUserBtn" onAction="#toUpdateUser" text="Update info" />
 
 

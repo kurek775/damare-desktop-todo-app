@@ -47,6 +47,12 @@ public class controllerUtils {
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
         db.insertTaskRow(conn,task);
     }
+
+    public static void addCategory(Category category){
+        dbFunctions db = new dbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+        db.insertCategoryRow(conn,category);
+    }
     public static void updateTask(Task task){
         dbFunctions db = new dbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");

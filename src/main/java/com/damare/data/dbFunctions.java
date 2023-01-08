@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.damare.model.Category;
 import com.damare.model.Task;
 import com.damare.model.User;
 import org.json.JSONObject;
@@ -31,6 +32,26 @@ public class dbFunctions {
         Statement statement;
         try {
             String query = String.format("insert into devel_user(username,user_email,user_passwd) values('%s','%s','%s');", user.getName(), user.getEmail(), user.getPassword());
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Row Inserted");
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void insertCategoryRow(Connection conn, Category category) {
+        Statement statement;
+        try {
+            String query = String.format("insert into devel_category(category_name,category_desc, category_user_id) values('%s','%s',%s);", category.getName(), category.getDesc(),  category.getUserId());
             statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Row Inserted");
