@@ -66,12 +66,24 @@ public class controllerUtils {
         return db.readAllTasks(conn,id);
 
     }
+
+    public static List<Category> viewCategories(Integer id){
+        dbFunctions db = new dbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+
+        return db.readAllCategories(conn,id);
+
+    }
     public static void removeTask(Integer id){
         dbFunctions db = new dbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
         db.deleteRowByAnything(conn,"devel_task","task_id",id);
     }
-
+    public static void removeCategory(Integer id){
+        dbFunctions db = new dbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+        db.deleteRowByAnything(conn,"devel_category","category_id",id);
+    }
 
     public static Integer loginUser(String lname, String password, Stage stage) {
         dbFunctions db = new dbFunctions();

@@ -1,9 +1,7 @@
 package com.damare.main;
 
 import com.damare.data.dbFunctions;
-import com.damare.model.Task;
-import com.damare.model.User;
-import com.damare.model.controllerUtils;
+import com.damare.model.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,7 +18,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import com.damare.model.applicationState;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -34,6 +31,9 @@ public class homeController {
     private Button logoutBtn;
     @FXML
     private ListView<Task> taskListView;
+
+    @FXML
+    private ListView<Category> categoryListView;
     @FXML
     private Button addTaskBtn;
 
@@ -48,7 +48,7 @@ public class homeController {
         User currentUser = applicationState.getInstance().getCurrentlyLoggedUser();
         helloUser.setText("Hello " + currentUser.getName());
         loadMyTasks();
-
+        loadMyCategories();
         logoutBtn.setStyle("-fx-background-color: #B0266B;");
 
         taskListView.setCellFactory(taskListView -> new ListCell<>() {
@@ -76,6 +76,33 @@ public class homeController {
                 }
             }
         });
+
+
+        categoryListView.setCellFactory(taskListView -> new ListCell<>() {
+            @Override
+            protected void updateItem(Category category, boolean empty) {
+                super.updateItem(category, empty);
+                if (!empty) {
+                    setText(category.getName());
+
+                    Button delete = new Button("delete");
+                    delete.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            controllerUtils.removeCategory(category.getId());
+                            loadMyCategories();
+                        }
+                    });
+
+
+                    setGraphic(new HBox(delete));
+
+                } else {
+                    setText(null);
+                    setGraphic(null);
+                }
+            }
+        });
     }
 
 
@@ -85,6 +112,14 @@ public class homeController {
         this.state = getInstance();
         User currentUser = applicationState.getInstance().getCurrentlyLoggedUser();
         taskListView.getItems().addAll(controllerUtils.viewTasks(currentUser.getId()));
+    }
+
+    private void loadMyCategories() {
+
+        categoryListView.getItems().clear();
+        this.state = getInstance();
+        User currentUser = applicationState.getInstance().getCurrentlyLoggedUser();
+        categoryListView.getItems().addAll(controllerUtils.viewCategories(currentUser.getId()));
     }
 
     public void clickOnLoadedTask(MouseEvent mouseEvent) {
@@ -98,7 +133,7 @@ public class homeController {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("updateTask.fxml"));
             Parent root = loader.load();
-           updateTaskController updateTaskController = loader.getController();
+            updateTaskController updateTaskController = loader.getController();
 
             Stage stage = (Stage) logoutBtn.getScene().getWindow();
 
@@ -110,9 +145,10 @@ public class homeController {
 
     }
 
+
     @FXML
     protected void toLogin() {
-       try {
+        try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent root = loader.load();
@@ -143,6 +179,7 @@ public class homeController {
             // Handle exception
         }
     }
+
     @FXML
     protected void toAddCategory() {
         try {

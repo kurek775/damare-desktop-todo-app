@@ -51,7 +51,7 @@ public class dbFunctions {
     public void insertCategoryRow(Connection conn, Category category) {
         Statement statement;
         try {
-            String query = String.format("insert into devel_category(category_name,category_desc, category_user_id) values('%s','%s',%s);", category.getName(), category.getDesc(),  category.getUserId());
+            String query = String.format("insert into devel_category(category_name,category_desc, category_user_id) values('%s','%s',%s);", category.getName(), category.getDesc(), category.getUserId());
             statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Row Inserted");
@@ -237,6 +237,38 @@ public class dbFunctions {
 
                 );
                 list.add(i, tsk);
+                i++;
+            }
+            return list;
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return list;
+    }
+
+    public List<Category> readAllCategories(Connection conn, Integer id) {
+        Statement statement;
+        List<Category> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+
+            String query = String.format("select * from devel_category where category_user_id= %s", id);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            Integer i = 0;
+            while (rs.next()) {
+                Category ctg = new Category(rs.getInt("category_id"), rs.getString("category_name"),
+                        rs.getString("category_desc"), rs.getInt("category_user_id"));
+
+                list.add(i, ctg);
                 i++;
             }
             return list;

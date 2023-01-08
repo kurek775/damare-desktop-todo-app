@@ -5,24 +5,28 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="247.0" prefWidth="301.0" spacing="80.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.damare.main.homeController">
-<padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-</padding>
+<VBox alignment="CENTER" prefHeight="247.0" prefWidth="301.0" spacing="10.0" xmlns:fx="http://javafx.com/fxml/1"
+      xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.damare.main.homeController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
 
-<children>
-    <Text fx:id="helloUser" text="hello" />
-    <ListView fx:id="taskListView" minWidth="150.0" minHeight="300" onMouseClicked="#clickOnLoadedTask" />
-    <Button fx:id="logoutBtn" onAction="#toLogin" text="Logout" />
-    <Button fx:id="addTaskBtn" onAction="#toAddTask" text="Add task" />
-    <Button fx:id="addCategoryBtn" onAction="#toAddCategory" text="Add category" />
-    <Button fx:id="updateUserBtn" onAction="#toUpdateUser" text="Update info" />
+    <children>
+        <Text fx:id="helloUser" text="hello"/>
+        <Text text="Tasks"/>
+        <ListView fx:id="taskListView" minWidth="150.0" minHeight="300" onMouseClicked="#clickOnLoadedTask"/>
+        <Text text="Categories"/>
+        <ListView fx:id="categoryListView" minWidth="150.0" minHeight="300" />
+        <Button fx:id="logoutBtn" onAction="#toLogin" text="Logout"/>
+        <Button fx:id="addTaskBtn" onAction="#toAddTask" text="Add task"/>
+        <Button fx:id="addCategoryBtn" onAction="#toAddCategory" text="Add category"/>
+        <Button fx:id="updateUserBtn" onAction="#toUpdateUser" text="Update info"/>
 
 
-</children>
-<padding>
-    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-</padding>
+    </children>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+    </padding>
 
 
 </VBox>
