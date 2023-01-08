@@ -50,6 +50,7 @@ public class registerController {
         else{
             User user = new User(null,nameField.getText(),emailField.getText(),passwordField.getText(),null);
             controllerUtils.addUser(user);
+            toLogin();
 
         }
 

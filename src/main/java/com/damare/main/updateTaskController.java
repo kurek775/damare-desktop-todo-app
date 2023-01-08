@@ -5,9 +5,14 @@ import com.damare.model.User;
 import com.damare.model.applicationState;
 import com.damare.model.controllerUtils;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -61,6 +66,20 @@ public class updateTaskController {
                     descriptionField.getText(), Date.from(dateField.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), true);
 
             controllerUtils.updateTask(task);
+            try {
+
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+                Parent root = loader.load();
+                homeController homeController = loader.getController();
+
+
+                Stage stage = (Stage) nameField.getScene().getWindow();
+
+                stage.setScene(new Scene(root));
+            } catch (IOException ex) {
+
+            }
 
         }
 
