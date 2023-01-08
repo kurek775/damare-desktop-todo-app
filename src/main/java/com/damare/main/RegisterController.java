@@ -1,7 +1,7 @@
 package com.damare.main;
 
 import com.damare.model.User;
-import com.damare.model.controllerUtils;
+import com.damare.model.ControllerUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,9 +10,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
 
-public class registerController {
+public class RegisterController {
 
     @FXML
     private TextField nameField;
@@ -39,17 +38,16 @@ public class registerController {
     @FXML
     protected void onRegisterButtonClick() {
 
-        /* TODO -->  Tady musí proběhnout nějaká validace asi klasika e-mail regex(možná na to je nějaká knihovna)
-        *  heslo alespon 8 znaků atd možná by stálo za to ho i zacryptovat pomocí bcryptu nebo něčeho takového
-        *  at je to fakt validní
-        *
-        * */
-        if(nameField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty() ){
+
+        boolean validatePassword = ControllerUtils.validatePassword(passwordField.getText(),(Stage) loginBtn.getScene().getWindow());
+        boolean validateName = ControllerUtils.validatePassword(nameField.getText(),(Stage) loginBtn.getScene().getWindow());
+        boolean validateEmail = ControllerUtils.validatePassword(emailField.getText(),(Stage) loginBtn.getScene().getWindow());
+        if(nameField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty() || validateEmail || validateName || validatePassword ){
             System.out.println("NAH");
         }
         else{
             User user = new User(null,nameField.getText(),emailField.getText(),passwordField.getText());
-            controllerUtils.addUser(user);
+            ControllerUtils.addUser(user);
             toLogin();
 
         }
@@ -63,7 +61,7 @@ public class registerController {
             // Load the FXML file for the new controller
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent root = loader.load();
-           loginController loginController = loader.getController();
+           LoginController loginController = loader.getController();
 
             // Get the current stage
             Stage stage = (Stage) passwordField.getScene().getWindow();

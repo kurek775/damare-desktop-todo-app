@@ -10,7 +10,7 @@ import com.damare.model.Task;
 import com.damare.model.User;
 import org.json.JSONObject;
 
-public class dbFunctions {
+public class DbFunctions {
     public Connection connectDb(String dbname, String user, String pass) {
         Connection conn = null;
         try {

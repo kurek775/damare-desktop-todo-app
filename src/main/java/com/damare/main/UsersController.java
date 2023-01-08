@@ -4,22 +4,14 @@ import com.damare.model.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-import java.io.IOException;
+import static com.damare.model.ApplicationState.getInstance;
 
-import static com.damare.model.applicationState.getInstance;
-
-public class usersController {
+public class UsersController {
 
 
     @FXML
@@ -36,7 +28,7 @@ public class usersController {
     @FXML
     private void initialize() {
         this.state = getInstance();
-        User currentUser = applicationState.getInstance().getCurrentlyLoggedUser();
+        User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
 
 
         loadUsers();
@@ -55,7 +47,7 @@ public class usersController {
                         @Override
                         public void handle(ActionEvent event) {
                             FriendRequest request = new FriendRequest(null, currentUser.getId(), user.getId(), 0, "send");
-                            controllerUtils.addRequest(request);
+                            ControllerUtils.addRequest(request);
                             loadUsers();
                             loadRequesters();
 
@@ -93,7 +85,7 @@ public class usersController {
             protected void updateItem(FriendRequest req, boolean empty) {
                 super.updateItem(req, empty);
                 if (!empty) {
-                    User usr = controllerUtils.findUser(req.getRequesterId());
+                    User usr = ControllerUtils.findUser(req.getRequesterId());
                     setText(usr.getName());
 
                     Button add = new Button("ACCEPT");
@@ -102,7 +94,7 @@ public class usersController {
                         public void handle(ActionEvent event) {
                             req.setStatusCode(1);
                             req.setStatusName("accepted");
-                            controllerUtils.updateFriendRequest(req);
+                            ControllerUtils.updateFriendRequest(req);
                             loadRequesters();
                             loadFriends();
                         }
@@ -126,20 +118,20 @@ public class usersController {
         userListView.getItems().clear();
         this.state = getInstance();
 
-        userListView.getItems().addAll(controllerUtils.viewAllUsers());
+        userListView.getItems().addAll(ControllerUtils.viewAllUsers());
     }
 
     private void loadRequesters() {
         requestListView.getItems().clear();
         this.state = getInstance();
-        User currentUser = applicationState.getInstance().getCurrentlyLoggedUser();
-        requestListView.getItems().addAll(controllerUtils.viewRequesters(currentUser.getId()));
+        User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
+        requestListView.getItems().addAll(ControllerUtils.viewRequesters(currentUser.getId()));
     }
     private void loadFriends() {
         friendsListView.getItems().clear();
         this.state = getInstance();
-        User currentUser = applicationState.getInstance().getCurrentlyLoggedUser();
-        friendsListView.getItems().addAll(controllerUtils.viewAllFriends(currentUser.getId()));
+        User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
+        friendsListView.getItems().addAll(ControllerUtils.viewAllFriends(currentUser.getId()));
     }
 
 }

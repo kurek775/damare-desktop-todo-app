@@ -2,15 +2,11 @@ package com.damare.main;
 
 import com.damare.model.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
-import java.time.ZoneId;
-import java.util.Date;
+import static com.damare.model.ApplicationState.getInstance;
 
-import static com.damare.model.applicationState.getInstance;
-
-public class addCategoryController {
+public class AddCategoryController {
 
     @FXML
     private TextField nameField;
@@ -18,14 +14,14 @@ public class addCategoryController {
     @FXML
     private TextField descriptionField;
 
-    private applicationState state;
+    private ApplicationState state;
 
 
     @FXML
     private void initialize() {
 
         this.state = getInstance();
-        User currentUser = applicationState.getInstance().getCurrentlyLoggedUser();
+        User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
 
 
 
@@ -34,14 +30,14 @@ public class addCategoryController {
     @FXML
     protected void onAddButtonClick() {
         this.state = getInstance();
-        User currentUser = applicationState.getInstance().getCurrentlyLoggedUser();
+        User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
 
         if(nameField.getText().isEmpty() ){
             System.out.println("NAH");
         }
         else{
             Category category = new Category(null,nameField.getText(),descriptionField.getText(),currentUser.getId());
-            controllerUtils.addCategory(category);
+            ControllerUtils.addCategory(category);
 
         }
 

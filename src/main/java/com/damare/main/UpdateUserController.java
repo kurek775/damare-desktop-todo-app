@@ -1,8 +1,8 @@
 package com.damare.main;
 
 import com.damare.model.User;
-import com.damare.model.applicationState;
-import com.damare.model.controllerUtils;
+import com.damare.model.ApplicationState;
+import com.damare.model.ControllerUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,9 +13,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static com.damare.model.applicationState.getInstance;
+import static com.damare.model.ApplicationState.getInstance;
 
-public class updateUserController {
+public class UpdateUserController {
 
     @FXML
     private TextField nameField;
@@ -29,13 +29,13 @@ public class updateUserController {
 
     @FXML
     private Button saveBtn;
-    private applicationState state;
+    private ApplicationState state;
 
 
     @FXML
     private void initialize() {
         this.state = getInstance();
-        User currentUser = applicationState.getInstance().getCurrentlyLoggedUser();
+        User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
         nameField.setText(currentUser.getName());
         emailField.setText(currentUser.getEmail());
         passwordField.setText(currentUser.getPassword());
@@ -46,15 +46,15 @@ public class updateUserController {
     @FXML
     protected void onSaveButtonClick() {
         this.state = getInstance();
-        User currentUser = applicationState.getInstance().getCurrentlyLoggedUser();
+        User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
 
 
         if (nameField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty()) {
             System.out.println("NAH");
         } else {
             User user = new User(currentUser.getId(), nameField.getText(), emailField.getText(), passwordField.getText());
-            controllerUtils.updateUser(user);
-            applicationState.getInstance().setCurrentlyLoggedUser(user);
+            ControllerUtils.updateUser(user);
+            ApplicationState.getInstance().setCurrentlyLoggedUser(user);
 
         }
 
@@ -67,7 +67,7 @@ public class updateUserController {
             // Load the FXML file for the new controller
             FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
             Parent root = loader.load();
-            homeController homecontroller = loader.getController();
+            HomeController homecontroller = loader.getController();
 
             // Get the current stage
             Stage stage = (Stage) passwordField.getScene().getWindow();

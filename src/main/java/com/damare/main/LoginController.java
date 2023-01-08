@@ -1,27 +1,18 @@
 package com.damare.main;
 
-import com.damare.data.dbFunctions;
-import com.damare.model.applicationState;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import com.damare.model.ApplicationState;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.fxml.*;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import com.damare.model.controllerUtils;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.sql.Connection;
+import com.damare.model.ControllerUtils;
 
-public class loginController {
+import java.io.IOException;
+
+public class LoginController {
 
     @FXML
     private TextField unameEmailField;
@@ -49,14 +40,14 @@ public class loginController {
 
     @FXML
     protected void onLoginButtonClick() {
-        Integer id = controllerUtils.loginUser(unameEmailField.getText(), passwordField.getText(), (Stage) loginBtn.getScene().getWindow());
+        Integer id = ControllerUtils.loginUser(unameEmailField.getText(), passwordField.getText(), (Stage) loginBtn.getScene().getWindow());
         if (id != null) {
             try {
-                applicationState.getInstance().setCurrentlyLoggedUser(controllerUtils.findUser(id));
+                ApplicationState.getInstance().setCurrentlyLoggedUser(ControllerUtils.findUser(id));
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
                 Parent root = loader.load();
-                homeController homeController = loader.getController();
+                HomeController homeController = loader.getController();
 
 
                 Stage stage = (Stage) loginBtn.getScene().getWindow();
@@ -80,7 +71,7 @@ public class loginController {
             // Load the FXML file for the new controller
             FXMLLoader loader = new FXMLLoader(getClass().getResource("register.fxml"));
             Parent root = loader.load();
-            registerController registerController = loader.getController();
+            RegisterController registerController = loader.getController();
 
             // Get the current stage
             Stage stage = (Stage) passwordField.getScene().getWindow();

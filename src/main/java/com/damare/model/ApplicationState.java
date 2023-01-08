@@ -1,20 +1,20 @@
 package com.damare.model;
 
-public class applicationState {
+public class ApplicationState {
 
-    private static applicationState INSTANCE;
+    private static ApplicationState INSTANCE;
 
     private User currentlyLoggedUser = null;
 
     private Task currentlyEditedTask= null;
 
-    private applicationState() {
+    private ApplicationState() {
 
     }
 
-    public static applicationState getInstance() {
+    public static ApplicationState getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new applicationState();
+            INSTANCE = new ApplicationState();
         }
 
         return INSTANCE;

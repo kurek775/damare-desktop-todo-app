@@ -2,8 +2,8 @@ package com.damare.main;
 
 import com.damare.model.Task;
 import com.damare.model.User;
-import com.damare.model.applicationState;
-import com.damare.model.controllerUtils;
+import com.damare.model.ApplicationState;
+import com.damare.model.ControllerUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,9 +17,9 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-import static com.damare.model.applicationState.getInstance;
+import static com.damare.model.ApplicationState.getInstance;
 
-public class updateTaskController {
+public class UpdateTaskController {
 
     @FXML
     private TextField nameField;
@@ -35,14 +35,14 @@ public class updateTaskController {
     private TextField descriptionField;
     @FXML
     private DatePicker dateField;
-    private applicationState state;
+    private ApplicationState state;
 
 
     @FXML
     private void initialize() {
 
         this.state = getInstance();
-        Task currentTask = applicationState.getInstance().getCurrentlyEditedTask();
+        Task currentTask = ApplicationState.getInstance().getCurrentlyEditedTask();
         nameField.setText(currentTask.getName());
         importanceField.setText(currentTask.getImportance().toString());
         durationField.setText(currentTask.getDuration().toString());
@@ -57,21 +57,21 @@ public class updateTaskController {
     @FXML
     protected void onSaveButtonClick() {
         this.state = getInstance();
-        User currentUser = applicationState.getInstance().getCurrentlyLoggedUser();
-        Task currentTask = applicationState.getInstance().getCurrentlyEditedTask();
+        User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
+        Task currentTask = ApplicationState.getInstance().getCurrentlyEditedTask();
         if (nameField.getText().isEmpty()) {
             System.out.println("NAH");
         } else {
             Task task = new Task(currentTask.getId(), Integer.parseInt(catIdField.getText()), currentUser.getId(), Integer.parseInt(importanceField.getText()), Integer.parseInt(durationField.getText()), nameField.getText(), placeField.getText(),
                     descriptionField.getText(), Date.from(dateField.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), true);
 
-            controllerUtils.updateTask(task);
+            ControllerUtils.updateTask(task);
             try {
 
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
                 Parent root = loader.load();
-                homeController homeController = loader.getController();
+                HomeController homeController = loader.getController();
 
 
                 Stage stage = (Stage) nameField.getScene().getWindow();
