@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.damare.model.Category;
+import com.damare.model.FriendRequest;
 import com.damare.model.Task;
 import com.damare.model.User;
 import org.json.JSONObject;
@@ -52,6 +53,27 @@ public class dbFunctions {
         Statement statement;
         try {
             String query = String.format("insert into devel_category(category_name,category_desc, category_user_id) values('%s','%s',%s);", category.getName(), category.getDesc(), category.getUserId());
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Row Inserted");
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void insertRequestRow(Connection conn, FriendRequest req) {
+        Statement statement;
+        try {
+            String query = String.format("insert into devel_friendship(user_id1_requester,user_id2_requested, friendship_status_code, friendship_status_name) values(%s,%s,%s,'%s');",
+                    req.getRequesterId(), req.getRequestedId(), req.getStatusCode(), req.getStatusName());
             statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Row Inserted");
@@ -131,6 +153,27 @@ public class dbFunctions {
         }
     }
 
+    public void updateFriendRequestRow(Connection conn, FriendRequest req) {
+        Statement statement;
+        try {
+            String query = String.format("update devel_friendship set user_id1_requester= %s,user_id2_requested= %s, friendship_status_code= %s, friendship_status_name= '%s'  where friendship_id=%s",
+                   req.getRequesterId(),req.getRequestedId(), req.getStatusCode(),req.getStatusName(), req.getId());
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Data Updated");
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     /*
     public void readAllTasks(Connection conn, Integer usrId){
         Statement statement;
@@ -153,23 +196,22 @@ public class dbFunctions {
     }
 */
     /* TODO -> vracet rovnou celého USERA*/
-    public JSONObject searchUsersById(Connection conn, int id) {
+    public User searchUsersById(Connection conn, int id) {
         Statement statement;
-        JSONObject usr = new JSONObject();
+        User usr = new User(null,null,null,null);
         ResultSet rs = null;
         try {
             String query = String.format("select * from devel_user where user_id='%s'", id);
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()) {
-                usr.put("id", rs.getString("user_id"));
-                usr.put("name", rs.getString("username"));
-                usr.put("email", rs.getString("user_email"));
-                usr.put("password", rs.getString("user_passwd"));
+                usr =new User(rs.getInt("user_id"),rs.getString("username"),rs.getString("user_email"),rs.getString("user_passwd"));
+
+
 
                 return usr;
-
             }
+
         } catch (Exception e) {
             System.out.println(e);
         } finally {
@@ -269,6 +311,103 @@ public class dbFunctions {
                         rs.getString("category_desc"), rs.getInt("category_user_id"));
 
                 list.add(i, ctg);
+                i++;
+            }
+            return list;
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return list;
+    }
+
+    public List<User> readAllUsers(Connection conn) {
+        Statement statement;
+        List<User> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+
+            String query = String.format("select * from devel_user");
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            Integer i = 0;
+            while (rs.next()) {
+                User user = new User(rs.getInt("user_id"), rs.getString("username")
+                        , rs.getString("user_email"), rs.getString("user_passwd"));
+
+
+                list.add(i, user);
+                i++;
+            }
+            return list;
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return list;
+    }
+    public List<User> readAllFriends(Connection conn, Integer id) {
+        Statement statement;
+        List<User> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+
+            String query = String.format("select * from devel_user inner join devel_friendship  on devel_user.user_id=devel_friendship.user_id1_requester where devel_friendship.user_id2_requested=%s and devel_friendship.friendship_status_code=1", id);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            Integer i = 0;
+            while (rs.next()) {
+                User user = new User(rs.getInt("user_id"), rs.getString("username")
+                        , rs.getString("user_email"), rs.getString("user_passwd"));
+
+
+                list.add(i, user);
+                i++;
+            }
+            return list;
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return list;
+    }
+    public List<FriendRequest> readRequesters(Connection conn, Integer id) {
+        Statement statement;
+        List<FriendRequest> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+
+            String query = String.format("select * from devel_friendship inner join devel_user  on devel_user.user_id=devel_friendship.user_id1_requester where devel_friendship.user_id2_requested=%s and devel_friendship.friendship_status_code=0", id);
+
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            Integer i = 0;
+            while (rs.next()) {
+
+                FriendRequest req = new FriendRequest(rs.getInt("friendship_id"), rs.getInt("user_id1_requester"),
+                        rs.getInt("user_id2_requested"), rs.getInt("friendship_status_code"), rs.getString("friendship_status_name"));
+                list.add(i, req);
                 i++;
             }
             return list;

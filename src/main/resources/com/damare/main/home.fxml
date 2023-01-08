@@ -17,10 +17,11 @@
         <ListView fx:id="taskListView" minWidth="150.0" minHeight="300" onMouseClicked="#clickOnLoadedTask"/>
         <Text text="Categories"/>
         <ListView fx:id="categoryListView" minWidth="150.0" minHeight="300" />
-        <Button fx:id="logoutBtn" onAction="#toLogin" text="Logout"/>
+        <Button fx:id="logoutBtn"  text="Logout"/>
         <Button fx:id="addTaskBtn" onAction="#toAddTask" text="Add task"/>
         <Button fx:id="addCategoryBtn" onAction="#toAddCategory" text="Add category"/>
         <Button fx:id="updateUserBtn" onAction="#toUpdateUser" text="Update info"/>
+        <Button fx:id="friendsBtn" onAction="#toFriends" text="Friends"/>
 
 
     </children>

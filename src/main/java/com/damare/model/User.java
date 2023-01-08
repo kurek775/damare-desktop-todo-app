@@ -8,15 +8,15 @@ public class User {
 
     private String email;
     private String password;
-    private List<Integer> friendlist;
 
 
-    public User(Integer id, String name, String email, String password, List<Integer> friendlist) {
+
+    public User(Integer id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.friendlist = friendlist;
+
     }
 
     public Integer getId() {
@@ -47,11 +47,5 @@ public class User {
         this.password = password;
     }
 
-    public List<Integer> getFriendlist() {
-        return friendlist;
-    }
 
-    public void setFriendlist(List<Integer> friendlist) {
-        this.friendlist = friendlist;
-    }
 }

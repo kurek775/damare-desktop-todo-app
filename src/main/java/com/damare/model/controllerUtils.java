@@ -1,12 +1,18 @@
 package com.damare.model;
 import com.damare.data.dbFunctions;
+import com.damare.main.loginController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import org.json.JSONObject;
+import javafx.scene.Node;
+import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +21,11 @@ import java.util.List;
 public class controllerUtils {
 
 
-    public static User currentUser(Integer id) {
+    public static User findUser(Integer id) {
         dbFunctions db = new dbFunctions();
-        List<Integer> friendlist = new ArrayList<>();
-        friendlist.add(2);
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-        JSONObject usr = (db.searchUsersById(conn, id));
-        User current = new User(usr.getInt("id"), usr.getString("name"), usr.getString("email"), usr.getString("password"),
-                friendlist);
+        User current = (db.searchUsersById(conn, id));
+
 
         return current;
     }
@@ -35,6 +38,13 @@ public class controllerUtils {
 
     }
 
+    public static void addRequest(FriendRequest req) {
+        dbFunctions db = new dbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+        db.insertRequestRow(conn,req);
+
+    }
+
     public static void updateUser(User user) {
         dbFunctions db = new dbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
@@ -42,6 +52,12 @@ public class controllerUtils {
 
     }
 
+    public static void updateFriendRequest(FriendRequest req) {
+        dbFunctions db = new dbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+        db.updateFriendRequestRow(conn,req);
+
+    }
     public static void addTask(Task task){
         dbFunctions db = new dbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
@@ -67,6 +83,27 @@ public class controllerUtils {
 
     }
 
+    public static List<User> viewAllUsers(){
+        dbFunctions db = new dbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+
+        return db.readAllUsers(conn);
+
+    }
+    public static List<User> viewAllFriends(Integer id){
+        dbFunctions db = new dbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+
+        return db.readAllFriends(conn, id);
+
+    }
+    public static List<FriendRequest> viewRequesters(Integer id){
+        dbFunctions db = new dbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+
+       return db.readRequesters(conn,id);
+
+    }
     public static List<Category> viewCategories(Integer id){
         dbFunctions db = new dbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
@@ -130,4 +167,7 @@ public class controllerUtils {
         label.setMinHeight(180);
         popup.show(stage);
     }
+
+
+
 }

@@ -48,7 +48,7 @@ public class registerController {
             System.out.println("NAH");
         }
         else{
-            User user = new User(null,nameField.getText(),emailField.getText(),passwordField.getText(),null);
+            User user = new User(null,nameField.getText(),emailField.getText(),passwordField.getText());
             controllerUtils.addUser(user);
             toLogin();
 

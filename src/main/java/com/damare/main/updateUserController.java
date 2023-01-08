@@ -52,7 +52,7 @@ public class updateUserController {
         if (nameField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty()) {
             System.out.println("NAH");
         } else {
-            User user = new User(currentUser.getId(), nameField.getText(), emailField.getText(), passwordField.getText(), currentUser.getFriendlist());
+            User user = new User(currentUser.getId(), nameField.getText(), emailField.getText(), passwordField.getText());
             controllerUtils.updateUser(user);
             applicationState.getInstance().setCurrentlyLoggedUser(user);
 

@@ -52,7 +52,7 @@ public class loginController {
         Integer id = controllerUtils.loginUser(unameEmailField.getText(), passwordField.getText(), (Stage) loginBtn.getScene().getWindow());
         if (id != null) {
             try {
-                applicationState.getInstance().setCurrentlyLoggedUser(controllerUtils.currentUser(id));
+                applicationState.getInstance().setCurrentlyLoggedUser(controllerUtils.findUser(id));
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
                 Parent root = loader.load();
