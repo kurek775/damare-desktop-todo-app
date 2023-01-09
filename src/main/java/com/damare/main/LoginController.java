@@ -1,6 +1,7 @@
 package com.damare.main;
 
 import com.damare.model.ApplicationState;
+import com.damare.model.User;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -36,21 +37,14 @@ public class LoginController {
         registerBtn.setStyle("-fx-background-color: #B0266B;");
         registerBtn.setOnAction(ControllerUtils::toRegister);
         loginBtn.setOnAction(e -> {
-            Integer id = ControllerUtils.loginUser(unameEmailField.getText(), passwordField.getText(), (Stage) loginBtn.getScene().getWindow());
-            if (id != null) {
-                ApplicationState.getInstance().setCurrentlyLoggedUser(ControllerUtils.findUser(id));
+            User usr = ControllerUtils.loginUser(unameEmailField.getText(), passwordField.getText(), (Stage) loginBtn.getScene().getWindow());
+            if (usr.getId() != null) {
+                ApplicationState.getInstance().setCurrentlyLoggedUser(usr);
                 ControllerUtils.toHome(e);
-            }
-            else{
-
             }
         });
 
     }
-
-
-
-
 
 
 }
