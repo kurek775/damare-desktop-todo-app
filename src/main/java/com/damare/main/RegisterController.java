@@ -40,8 +40,9 @@ public class RegisterController {
 
 
         boolean validatePassword = ControllerUtils.validatePassword(passwordField.getText(),(Stage) loginBtn.getScene().getWindow());
-        boolean validateName = ControllerUtils.validatePassword(nameField.getText(),(Stage) loginBtn.getScene().getWindow());
-        boolean validateEmail = ControllerUtils.validatePassword(emailField.getText(),(Stage) loginBtn.getScene().getWindow());
+        boolean validateName = ControllerUtils.validateUsername(nameField.getText(),(Stage) loginBtn.getScene().getWindow());
+        boolean validateEmail = ControllerUtils.validateEmail(emailField.getText(),(Stage) loginBtn.getScene().getWindow());
+
         if(nameField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty() || validateEmail || validateName || validatePassword ){
             System.out.println("NAH");
         }
