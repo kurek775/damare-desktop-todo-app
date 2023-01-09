@@ -1,15 +1,23 @@
 package com.damare.model;
 import com.damare.data.DbFunctions;
+import com.damare.main.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import org.json.JSONObject;
-
+import javafx.scene.Node;
+import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
+
+
 
 
 public class ControllerUtils {
@@ -28,92 +36,99 @@ public class ControllerUtils {
     public static void addUser(User user) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-        db.insertUserRow(conn,user);
+        db.insertUserRow(conn, user);
 
     }
 
     public static void addRequest(FriendRequest req) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-        db.insertRequestRow(conn,req);
+        db.insertRequestRow(conn, req);
 
     }
 
     public static void updateUser(User user) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-        db.updateUserRow(conn,user);
+        db.updateUserRow(conn, user);
 
     }
 
     public static void updateFriendRequest(FriendRequest req) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-        db.updateFriendRequestRow(conn,req);
+        db.updateFriendRequestRow(conn, req);
 
     }
-    public static void addTask(Task task){
+
+    public static void addTask(Task task) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-        db.insertTaskRow(conn,task);
+        db.insertTaskRow(conn, task);
     }
 
-    public static void addCategory(Category category){
+    public static void addCategory(Category category) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-        db.insertCategoryRow(conn,category);
+        db.insertCategoryRow(conn, category);
     }
-    public static void updateTask(Task task){
+
+    public static void updateTask(Task task) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-        db.updateTaskRow(conn,task);
+        db.updateTaskRow(conn, task);
     }
 
-    public static List<Task> viewTasks(Integer id){
+    public static List<Task> viewTasks(Integer id) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
 
-        return db.readAllTasks(conn,id);
+        return db.readAllTasks(conn, id);
 
     }
 
-    public static List<User> viewAllUsers(){
+    public static List<User> viewAllUsers() {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
 
         return db.readAllUsers(conn);
 
     }
-    public static List<User> viewAllFriends(Integer id){
+
+    public static List<User> viewAllFriends(Integer id) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
 
         return db.readAllFriends(conn, id);
 
     }
-    public static List<FriendRequest> viewRequesters(Integer id){
+
+    public static List<FriendRequest> viewRequesters(Integer id) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
 
-       return db.readRequesters(conn,id);
-
-    }
-    public static List<Category> viewCategories(Integer id){
-        DbFunctions db = new DbFunctions();
-        Connection conn = db.connectDb("devel", "postgre", "Damare123");
-
-        return db.readAllCategories(conn,id);
+        return db.readRequesters(conn, id);
 
     }
-    public static void removeTask(Integer id){
+
+    public static List<Category> viewCategories(Integer id) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-        db.deleteRowByAnything(conn,"devel_task","task_id",id);
+
+        return db.readAllCategories(conn, id);
+
     }
-    public static void removeCategory(Integer id){
+
+    public static void removeTask(Integer id) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-        db.deleteRowByAnything(conn,"devel_category","category_id",id);
+        db.deleteRowByAnything(conn, "devel_task", "task_id", id);
+    }
+
+    public static void removeCategory(Integer id) {
+        DbFunctions db = new DbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+        db.deleteRowByAnything(conn, "devel_category", "category_id", id);
     }
 
     public static Integer loginUser(String lname, String password, Stage stage) {
@@ -162,68 +177,206 @@ public class ControllerUtils {
         popup.show(stage);
     }
 
-    public static boolean validateUsername(String userName, Stage stage){
+    public static boolean validateUsername(String userName, Stage stage) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
 
-        if (db.searchByNameOrMail(conn, userName).isEmpty()){
+        if (db.searchByNameOrMail(conn, userName).isEmpty()) {
             System.out.println("Toto jmeno je volne");
             return false;
-        }
-        else {
-            showPopup(stage,"Toto jmeno jiz nekdo vyuziva");
+        } else {
+            showPopup(stage, "Toto jmeno jiz nekdo vyuziva");
             return true;
         }
     }
 
-    public static boolean validateEmail(String email, Stage stage){
+    public static boolean validateEmail(String email, Stage stage) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
 
-        if (db.searchByNameOrMail(conn, email).isEmpty()){
+        if (db.searchByNameOrMail(conn, email).isEmpty()) {
             System.out.println("Tento email je volny");
             return false;
-        }
-        else {
-            showPopup(stage,"Tento email jiz nekdo vyuziva");
+        } else {
+            showPopup(stage, "Tento email jiz nekdo vyuziva");
             return true;
         }
     }
 
-    public static boolean validatePassword(String password, Stage stage){
+    public static boolean validatePassword(String password, Stage stage) {
         boolean hasNum = false;
         boolean hasCap = false;
         boolean hasLow = false;
         char c;
 
-        if (password.length()<8){
+        if (password.length() < 8) {
 
-            showPopup(stage,"Heslo musí mít minimálně 8 znaků");
+            showPopup(stage, "Heslo musí mít minimálně 8 znaků");
             return true;
-        }
-        else {
+        } else {
 
 
-            for (int i = 0; i < password.length(); i++){
+            for (int i = 0; i < password.length(); i++) {
                 c = password.charAt(i);
-                if (Character.isDigit(c)){
+                if (Character.isDigit(c)) {
                     hasNum = true;
 
-                }
-                else if (Character.isUpperCase(c)) {
+                } else if (Character.isUpperCase(c)) {
                     hasCap = true;
-                }
-                else if (Character.isLowerCase(c)) {
+                } else if (Character.isLowerCase(c)) {
                     hasLow = true;
                 }
-                if (hasCap && hasLow && hasNum){
+                if (hasCap && hasLow && hasNum) {
                     System.out.println("Heslo je v pořádku");
                     return false;
                 }
             }
         }
 
-        showPopup(stage,"Heslo musí obsahovat velké písmeno, malé písmeno a číslo");
+        showPopup(stage, "Heslo musí obsahovat velké písmeno, malé písmeno a číslo");
         return true;
+    }
+
+    @FXML
+   public static void toLogin(ActionEvent event) {
+        try {
+            // Load the FXML file for the new controller
+            FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("login.fxml"));
+            Parent root = loader.load();
+            LoginController loginController = loader.getController();
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene on the stage
+            stage.setScene(new Scene(root));
+        } catch (IOException ex) {
+            // Handle exception
+        }
+    }
+
+    @FXML
+    public static void toRegister(ActionEvent event) {
+        try {
+            // Load the FXML file for the new controller
+            FXMLLoader loader = new FXMLLoader(RegisterController.class.getResource("register.fxml"));
+            Parent root = loader.load();
+            RegisterController registerController = loader.getController();
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene on the stage
+            stage.setScene(new Scene(root));
+        } catch (IOException ex) {
+            // Handle exception
+        }
+    }
+
+    @FXML
+    public static void toHome(ActionEvent event) {
+        try {
+            // Load the FXML file for the new controller
+            FXMLLoader loader = new FXMLLoader(HomeController.class.getResource("home.fxml"));
+            Parent root = loader.load();
+            HomeController homeController = loader.getController();
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene on the stage
+            stage.setScene(new Scene(root));
+        } catch (IOException ex) {
+            // Handle exception
+        }
+    }
+
+    @FXML
+    public static void toAddTask(ActionEvent event) {
+        try {
+            // Load the FXML file for the new controller
+            FXMLLoader loader = new FXMLLoader(AddTaskController.class.getResource("addTask.fxml"));
+            Parent root = loader.load();
+            AddTaskController addTaskController = loader.getController();
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene on the stage
+            stage.setScene(new Scene(root));
+        } catch (IOException ex) {
+            // Handle exception
+        }
+    }
+
+    @FXML
+    public static void toUpdateTask(ActionEvent event) {
+        try {
+            // Load the FXML file for the new controller
+            FXMLLoader loader = new FXMLLoader(UpdateTaskController.class.getResource("updateTask.fxml"));
+            Parent root = loader.load();
+            UpdateTaskController updateTaskController = loader.getController();
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene on the stage
+            stage.setScene(new Scene(root));
+        } catch (IOException ex) {
+            // Handle exception
+        }
+    }
+
+    @FXML
+    public static void toUpdateUser(ActionEvent event) {
+        try {
+            // Load the FXML file for the new controller
+            FXMLLoader loader = new FXMLLoader(UpdateUserController.class.getResource("updateUser.fxml"));
+            Parent root = loader.load();
+            UpdateUserController updateUserController = loader.getController();
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene on the stage
+            stage.setScene(new Scene(root));
+        } catch (IOException ex) {
+            // Handle exception
+        }
+    }
+    @FXML
+    public static void toUsers(ActionEvent event) {
+        try {
+            // Load the FXML file for the new controller
+            FXMLLoader loader = new FXMLLoader(UsersController.class.getResource("users.fxml"));
+            Parent root = loader.load();
+            UsersController userController = loader.getController();
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene on the stage
+            stage.setScene(new Scene(root));
+        } catch (IOException ex) {
+            // Handle exception
+        }
+    }
+
+    @FXML
+    public static void toAddCategory(ActionEvent event) {
+        try {
+            // Load the FXML file for the new controller
+            FXMLLoader loader = new FXMLLoader(AddCategoryController.class.getResource("addCategory.fxml"));
+            Parent root = loader.load();
+            AddCategoryController addCategoryController = loader.getController();
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene on the stage
+            stage.setScene(new Scene(root));
+        } catch (IOException ex) {
+            // Handle exception
+        }
     }
 }

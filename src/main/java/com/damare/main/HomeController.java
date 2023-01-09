@@ -20,7 +20,12 @@ import java.io.IOException;
 import static com.damare.model.ApplicationState.getInstance;
 
 public class HomeController {
-
+    @FXML
+    private Button addCategoryBtn;
+    @FXML
+    private Button friendsBtn;
+    @FXML
+    private Button updateUserBtn;
     @FXML
     private Button logoutBtn;
     @FXML
@@ -44,7 +49,11 @@ public class HomeController {
         loadMyTasks();
         loadMyCategories();
         logoutBtn.setStyle("-fx-background-color: #B0266B;");
-
+        logoutBtn.setOnAction(ControllerUtils::toLogin);
+        addTaskBtn.setOnAction(ControllerUtils::toAddTask);
+        addCategoryBtn.setOnAction(ControllerUtils::toAddCategory);
+        friendsBtn.setOnAction(ControllerUtils::toUsers);
+        updateUserBtn.setOnAction(ControllerUtils::toUpdateUser);
         taskListView.setCellFactory(taskListView -> new ListCell<>() {
             @Override
             protected void updateItem(Task task, boolean empty) {
@@ -120,10 +129,11 @@ public class HomeController {
         this.state = getInstance();
         Task clicked = taskListView.getSelectionModel().getSelectedItem();
 
-
+        ActionEvent ae = new ActionEvent(mouseEvent.getSource(),mouseEvent.getTarget());
         ApplicationState.getInstance().setCurrentlyEditedTask(clicked);
         if (clicked == null) return;
-        try {
+        ControllerUtils.toUpdateTask(ae);
+       /* try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("updateTask.fxml"));
             Parent root = loader.load();
@@ -134,98 +144,9 @@ public class HomeController {
             stage.setScene(new Scene(root));
         } catch (IOException ex) {
 
-        }
+        }*/
 
 
     }
 
-
-    @FXML
-    protected void toLogin() {
-
-        try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-            Parent root = loader.load();
-            LoginController loginController = loader.getController();
-
-            Stage stage = (Stage) logoutBtn.getScene().getWindow();
-
-            stage.setScene(new Scene(root));
-        } catch (IOException ex) {
-
-        }
-    }
-
-    @FXML
-    protected void toAddTask() {
-        try {
-            // Load the FXML file for the new controller
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("addTask.fxml"));
-            Parent root = loader.load();
-            AddTaskController addtaskController = loader.getController();
-
-            // Get the current stage
-            Stage stage = (Stage) logoutBtn.getScene().getWindow();
-
-            // Set the new scene on the stage
-            stage.setScene(new Scene(root));
-        } catch (IOException ex) {
-            // Handle exception
-        }
-    }
-
-    @FXML
-    protected void toAddCategory() {
-        try {
-            // Load the FXML file for the new controller
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("addCategory.fxml"));
-            Parent root = loader.load();
-            AddCategoryController addCategoryController = loader.getController();
-
-            // Get the current stage
-            Stage stage = (Stage) logoutBtn.getScene().getWindow();
-
-            // Set the new scene on the stage
-            stage.setScene(new Scene(root));
-        } catch (IOException ex) {
-            // Handle exception
-        }
-    }
-
-    @FXML
-    protected void toUpdateUser() {
-        try {
-            // Load the FXML file for the new controller
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("updateUser.fxml"));
-            Parent root = loader.load();
-            UpdateUserController updateusercontroller = loader.getController();
-
-            // Get the current stage
-            Stage stage = (Stage) logoutBtn.getScene().getWindow();
-
-            // Set the new scene on the stage
-            stage.setScene(new Scene(root));
-        } catch (IOException ex) {
-            // Handle exception
-        }
-    }
-
-    @FXML
-    protected void toFriends() {
-        try {
-            // Load the FXML file for the new controller
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("users.fxml"));
-            Parent root = loader.load();
-            UsersController usersController = loader.getController();
-
-            // Get the current stage
-            Stage stage = (Stage) logoutBtn.getScene().getWindow();
-
-            // Set the new scene on the stage
-            stage.setScene(new Scene(root));
-        } catch (IOException ex) {
-            // Handle exception
-        }
-    }
 }

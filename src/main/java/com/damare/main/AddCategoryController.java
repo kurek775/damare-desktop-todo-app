@@ -2,12 +2,14 @@ package com.damare.main;
 
 import com.damare.model.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import static com.damare.model.ApplicationState.getInstance;
 
 public class AddCategoryController {
-
+    @FXML
+    private Button homeBtn;
     @FXML
     private TextField nameField;
 
@@ -22,7 +24,7 @@ public class AddCategoryController {
 
         this.state = getInstance();
         User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
-
+        homeBtn.setOnAction(ControllerUtils::toHome);
 
 
     }

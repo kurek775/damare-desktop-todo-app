@@ -18,7 +18,7 @@
         <TextField fx:id="passwordField" />
 
         <Button fx:id="saveBtn" onAction="#onSaveButtonClick" text="Save" />
-        <Button fx:id="homeBtn" onAction="#toHome" text="Home" />
+        <Button fx:id="homeBtn"  text="Home" />
 
     </children>
     <padding>

@@ -5,6 +5,7 @@ import com.damare.model.User;
 import com.damare.model.ApplicationState;
 import com.damare.model.ControllerUtils;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
@@ -15,6 +16,8 @@ import static com.damare.model.ApplicationState.getInstance;
 
 public class AddTaskController {
 
+    @FXML
+    private Button homeBtn;
     @FXML
     private TextField nameField;
     @FXML
@@ -37,7 +40,7 @@ public class AddTaskController {
 
         this.state = getInstance();
         User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
-
+        homeBtn.setOnAction(ControllerUtils::toHome);
 
 
     }

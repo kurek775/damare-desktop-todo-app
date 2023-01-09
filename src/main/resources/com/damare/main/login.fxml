@@ -15,8 +15,8 @@
 
         <Label text="password" />
         <TextField fx:id="passwordField" />
-        <Button fx:id="loginBtn" onAction="#onLoginButtonClick" text="Login" />
-        <Button fx:id="registerBtn" onAction="#toRegister" text="Register" />
+        <Button fx:id="loginBtn"  text="Login" />
+        <Button fx:id="registerBtn" text="Register" />
 
 
     </children>

@@ -41,6 +41,7 @@ public class UpdateUserController {
         passwordField.setText(currentUser.getPassword());
         homeBtn.setStyle("-fx-background-color: #00ff00;");
         saveBtn.setStyle("-fx-background-color: #B0266B;");
+        homeBtn.setOnAction(ControllerUtils::toHome);
     }
 
     @FXML
@@ -61,23 +62,6 @@ public class UpdateUserController {
 
     }
 
-    @FXML
-    protected void toHome() {
-        try {
-            // Load the FXML file for the new controller
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
-            Parent root = loader.load();
-            HomeController homecontroller = loader.getController();
-
-            // Get the current stage
-            Stage stage = (Stage) passwordField.getScene().getWindow();
-
-            // Set the new scene on the stage
-            stage.setScene(new Scene(root));
-        } catch (IOException ex) {
-            // Handle exception
-        }
-    }
 
 
 }

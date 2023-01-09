@@ -21,7 +21,8 @@ public class UsersController {
 
     @FXML
     private ListView<User> friendsListView;
-
+    @FXML
+    private Button homeBtn;
     private Object state;
 
 
@@ -29,7 +30,7 @@ public class UsersController {
     private void initialize() {
         this.state = getInstance();
         User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
-
+        homeBtn.setOnAction(ControllerUtils::toHome);
 
         loadUsers();
         loadRequesters();

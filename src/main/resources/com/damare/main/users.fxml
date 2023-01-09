@@ -19,7 +19,7 @@
         <ListView fx:id="requestListView" minWidth="150.0" minHeight="300" />
         <Text text="Friends"/>
         <ListView fx:id="friendsListView" minWidth="150.0" minHeight="300" />
-
+        <Button fx:id="homeBtn"  text="Home" />
 
 
 

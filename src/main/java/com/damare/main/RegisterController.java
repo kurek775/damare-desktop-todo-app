@@ -1,5 +1,6 @@
 package com.damare.main;
 
+import com.damare.model.ApplicationState;
 import com.damare.model.User;
 import com.damare.model.ControllerUtils;
 import javafx.fxml.FXML;
@@ -33,49 +34,22 @@ public class RegisterController {
 
         registerBtn.setStyle("-fx-background-color: #00ff00;");
         loginBtn.setStyle("-fx-background-color: #B0266B;");
+        loginBtn.setOnAction(ControllerUtils::toLogin);
+        registerBtn.setOnAction(e -> {
+
+            boolean validatePassword = ControllerUtils.validatePassword(passwordField.getText(), (Stage) loginBtn.getScene().getWindow());
+            boolean validateName = ControllerUtils.validateUsername(nameField.getText(), (Stage) loginBtn.getScene().getWindow());
+            boolean validateEmail = ControllerUtils.validateEmail(emailField.getText(), (Stage) loginBtn.getScene().getWindow());
+            if (nameField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty() || validateEmail || validateName || validatePassword) {
+                System.out.println("NAH");
+            } else {
+                User user = new User(null, nameField.getText(), emailField.getText(), passwordField.getText());
+                ControllerUtils.addUser(user);
+                ControllerUtils.toLogin(e);
+
+            }
+        });
     }
-
-    @FXML
-    protected void onRegisterButtonClick() {
-
-
-        boolean validatePassword = ControllerUtils.validatePassword(passwordField.getText(),(Stage) loginBtn.getScene().getWindow());
-        boolean validateName = ControllerUtils.validateUsername(nameField.getText(),(Stage) loginBtn.getScene().getWindow());
-        boolean validateEmail = ControllerUtils.validateEmail(emailField.getText(),(Stage) loginBtn.getScene().getWindow());
-
-        if(nameField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty() || validateEmail || validateName || validatePassword ){
-            System.out.println("NAH");
-        }
-        else{
-            User user = new User(null,nameField.getText(),emailField.getText(),passwordField.getText());
-            ControllerUtils.addUser(user);
-            toLogin();
-
-        }
-
-
-    }
-
-    @FXML
-    protected void toLogin() {
-        try {
-            // Load the FXML file for the new controller
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-            Parent root = loader.load();
-           LoginController loginController = loader.getController();
-
-            // Get the current stage
-            Stage stage = (Stage) passwordField.getScene().getWindow();
-
-            // Set the new scene on the stage
-            stage.setScene(new Scene(root));
-        } catch (IOException ex) {
-            // Handle exception
-        }
-    }
-
-
-
 
 
 }

@@ -16,7 +16,7 @@
 
 
         <Button fx:id="addBtn" onAction="#onAddButtonClick" text="Save" />
-
+        <Button fx:id="homeBtn"  text="Home" />
 
     </children>
     <padding>

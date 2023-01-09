@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -20,7 +21,8 @@ import java.util.Date;
 import static com.damare.model.ApplicationState.getInstance;
 
 public class UpdateTaskController {
-
+    @FXML
+    private Button homeBtn;
     @FXML
     private TextField nameField;
     @FXML
@@ -40,7 +42,7 @@ public class UpdateTaskController {
 
     @FXML
     private void initialize() {
-
+        homeBtn.setOnAction(ControllerUtils::toHome);
         this.state = getInstance();
         Task currentTask = ApplicationState.getInstance().getCurrentlyEditedTask();
         nameField.setText(currentTask.getName());

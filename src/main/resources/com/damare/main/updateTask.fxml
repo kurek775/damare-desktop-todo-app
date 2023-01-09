@@ -24,7 +24,7 @@
         <Label text="date" />
         <DatePicker fx:id="dateField" />
         <Button fx:id="saveBtn" onAction="#onSaveButtonClick" text="Save" />
-
+        <Button fx:id="homeBtn"  text="Home" />
 
     </children>
     <padding>
