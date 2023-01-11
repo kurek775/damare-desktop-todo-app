@@ -14,7 +14,7 @@
         <TextField fx:id="unameEmailField" />
 
         <Label text="password" />
-        <TextField fx:id="passwordField" />
+        <PasswordField fx:id="passwordField" />
         <Button fx:id="loginBtn"  text="Login" />
         <Button fx:id="registerBtn" text="Register" />
 

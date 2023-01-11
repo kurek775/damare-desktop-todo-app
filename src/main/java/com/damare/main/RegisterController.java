@@ -19,7 +19,7 @@ public class RegisterController {
     @FXML
     private TextField emailField;
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
 
     @FXML
     private Button loginBtn;
