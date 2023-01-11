@@ -195,7 +195,7 @@ public class DbFunctions {
         }
     }
 */
-    /* TODO -> vracet rovnou celého USERA*/
+
     public User searchUsersById(Connection conn, int id) {
         Statement statement;
         User usr = new User(null,null,null,null);
@@ -226,10 +226,9 @@ public class DbFunctions {
         return usr;
     }
 
-    /* TODO -> vracet rovnou celého USERA*/
-    public JSONObject searchByNameOrMail(Connection conn, String name) {
+    public User searchByNameOrMail(Connection conn, String name) {
         Statement statement;
-        JSONObject usr = new JSONObject();
+        User usr = new User(null,null,null,null);
         ResultSet rs = null;
         try {
 
@@ -237,10 +236,9 @@ public class DbFunctions {
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()) {
-                usr.put("id", rs.getString("user_id"));
-                usr.put("name", rs.getString("username"));
-                usr.put("email", rs.getString("user_email"));
-                usr.put("password", rs.getString("user_passwd"));
+                usr =new User(rs.getInt("user_id"),rs.getString("username"),rs.getString("user_email"),rs.getString("user_passwd"));
+
+
 
                 return usr;
 

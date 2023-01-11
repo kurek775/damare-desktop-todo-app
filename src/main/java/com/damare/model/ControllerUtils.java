@@ -24,8 +24,8 @@ public class ControllerUtils {
 
 
     public static User findUser(Integer id) {
-        DbFunctions db = new DbFunctions();
-        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+       DbFunctions db = new DbFunctions();
+       Connection conn = db.connectDb("devel", "postgre", "Damare123");
         User current = (db.searchUsersById(conn, id));
 
 
@@ -106,7 +106,6 @@ public class ControllerUtils {
     public static List<FriendRequest> viewRequesters(Integer id) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-
         return db.readRequesters(conn, id);
 
     }
@@ -114,8 +113,7 @@ public class ControllerUtils {
     public static List<Category> viewCategories(Integer id) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-
-        return db.readAllCategories(conn, id);
+    return db.readAllCategories(conn, id);
 
     }
 
@@ -131,24 +129,25 @@ public class ControllerUtils {
         db.deleteRowByAnything(conn, "devel_category", "category_id", id);
     }
 
-    public static Integer loginUser(String lname, String password, Stage stage) {
+    public static User loginUser(String lname, String password, Stage stage) {
+
         DbFunctions db = new DbFunctions();
-        Integer rt = null;
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-        JSONObject usr = (db.searchByNameOrMail(conn, lname));
-        if (usr.isEmpty()) {
+
+        User usr = (db.searchByNameOrMail(conn, lname));
+        if (usr.getId() == null) {
 
             showPopup(stage, "Uživatel nebyl nalezen");
         } else {
-            if (checkPassword(password, usr.getString("password"))) {
-                rt = usr.getInt("id");
+            if (checkPassword(password, usr.getPassword())) {
+                return usr;
 
             } else {
                 showPopup(stage, "Špatně zadané heslo");
             }
 
         }
-        return rt;
+        return usr;
     }
 
     public static boolean checkPassword(String password, String passwordDb) {
@@ -180,8 +179,7 @@ public class ControllerUtils {
     public static boolean validateUsername(String userName, Stage stage) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-
-        if (db.searchByNameOrMail(conn, userName).isEmpty()) {
+        if (db.searchByNameOrMail(conn, userName).getName().isEmpty()) {
             System.out.println("Toto jmeno je volne");
             return false;
         } else {
@@ -193,8 +191,7 @@ public class ControllerUtils {
     public static boolean validateEmail(String email, Stage stage) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-
-        if (db.searchByNameOrMail(conn, email).isEmpty()) {
+        if (db.searchByNameOrMail(conn, email).getName().isEmpty()) {
             System.out.println("Tento email je volny");
             return false;
         } else {
