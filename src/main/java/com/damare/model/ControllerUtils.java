@@ -179,7 +179,7 @@ public class ControllerUtils {
     public static boolean validateUsername(String userName, Stage stage) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-        if (db.searchByNameOrMail(conn, userName).getName().isEmpty()) {
+        if (db.searchByNameOrMail(conn, userName).getName() == null) {
             System.out.println("Toto jmeno je volne");
             return false;
         } else {
@@ -191,7 +191,7 @@ public class ControllerUtils {
     public static boolean validateEmail(String email, Stage stage) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-        if (db.searchByNameOrMail(conn, email).getName().isEmpty()) {
+        if (db.searchByNameOrMail(conn, email).getEmail() == null) {
             System.out.println("Tento email je volny");
             return false;
         } else {

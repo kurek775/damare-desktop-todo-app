@@ -37,10 +37,10 @@ public class RegisterController {
         loginBtn.setOnAction(ControllerUtils::toLogin);
         registerBtn.setOnAction(e -> {
 
-            boolean validatePassword = ControllerUtils.validatePassword(passwordField.getText(), (Stage) loginBtn.getScene().getWindow());
+       boolean validatePassword = ControllerUtils.validatePassword(passwordField.getText(), (Stage) loginBtn.getScene().getWindow());
             boolean validateName = ControllerUtils.validateUsername(nameField.getText(), (Stage) loginBtn.getScene().getWindow());
             boolean validateEmail = ControllerUtils.validateEmail(emailField.getText(), (Stage) loginBtn.getScene().getWindow());
-            if (nameField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty() || validateEmail || validateName || validatePassword) {
+            if (nameField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty()  || validateEmail || validateName || validatePassword) {
                 System.out.println("NAH");
             } else {
                 User user = new User(null, nameField.getText(), emailField.getText(), passwordField.getText());
