@@ -48,20 +48,56 @@ public class AddTaskController {
     @FXML
     protected void onAddButtonClick() {
         this.state = getInstance();
-        User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
+        User currentUser = getInstance().getCurrentlyLoggedUser();
 
-        if(nameField.getText().isEmpty() ){
-            System.out.println("NAH");
+        inputVerification();
+
+        String name = nameField.getText();
+
+        /*
+        int importance = 0;
+        if (importanceField.getText().isEmpty()) {
+            importance = 99999;
         }
-        else{
-            Task task = new Task(null,Integer.parseInt(catIdField.getText()),currentUser.getId(),Integer.parseInt(importanceField.getText()),Integer.parseInt(durationField.getText()),nameField.getText(),placeField.getText(),
-                    descriptionField.getText(), Date.from(dateField.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()),true);
+        else {
+        */
+        int importance = Integer.parseInt(importanceField.getText());
+        //}
 
-            ControllerUtils.addTask(task);
+        int duration = Integer.parseInt(durationField.getText());
+        String place = placeField.getText();
+        String description = descriptionField.getText();
+        Date dateTime = Date.from(dateField.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        int currentUserId = currentUser.getId();
 
-        }
+        Task task = new Task(
+                null,
+                Integer.parseInt(catIdField.getText()),
+                currentUserId,
+                importance,
+                duration,
+                name,
+                place,
+                description,
+                dateTime,
+                false
+        );
 
+        ControllerUtils.addTask(task);
 
     }
 
+    private void inputVerification(){
+        if(nameField.getText().isEmpty() ){
+            System.out.println("Name is required.");
+        }
+        if(!importanceField.getText().isEmpty() && !importanceField.getText().matches("\\d\\d?")) {
+            System.out.println("Importance has to be a number from 0 to 99.");
+        }
+        if(!durationField.getText().isEmpty() && !durationField.getText().matches("\\d\\d?\\d?")) {
+            System.out.println("Duration has to be a number from 0 to 999.");
+        }
+    }
+
 }
+
