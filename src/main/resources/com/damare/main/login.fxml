@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0"  xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.damare.main.LoginController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.damare.main.LoginController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -21,12 +21,12 @@
             <Font name="System Bold" size="35.0" />
          </font>
       </Text>
-      <ImageView fitHeight="120.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="120.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/Login.PNG" />
          </image></ImageView>
-        <TextField fx:id="unameEmailField" focusTraversable="false" prefHeight="26.0" prefWidth="543.0" promptText="uname or email"  />
-        <PasswordField fx:id="passwordField" focusTraversable="false" prefHeight="26.0" prefWidth="480.0" promptText="password"  />
+        <TextField fx:id="unameEmailField" focusTraversable="false" prefHeight="26.0" prefWidth="543.0" promptText="uname or email" />
+        <PasswordField fx:id="passwordField" focusTraversable="false" prefHeight="26.0" prefWidth="480.0" promptText="password" />
         <Button fx:id="loginBtn" prefHeight="26.0" prefWidth="264.0" text="Login">
          <font>
             <Font name="System Bold" size="16.0" />
