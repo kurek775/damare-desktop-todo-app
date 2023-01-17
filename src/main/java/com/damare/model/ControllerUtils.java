@@ -376,4 +376,23 @@ public class ControllerUtils {
             // Handle exception
         }
     }
+
+    @FXML
+    public static void toLeaderBoard(ActionEvent event) {
+        try {
+            // Load the FXML file for the new controller
+            FXMLLoader loader = new FXMLLoader(LeaderBoardController.class.getResource("leaderBoard.fxml"));
+            Parent root = loader.load();
+            LeaderBoardController leaderBoardController = loader.getController();
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene on the stage
+            stage.setScene(new Scene(root));
+        } catch (IOException ex) {
+            // Handle exception
+        }
+    }
+
 }

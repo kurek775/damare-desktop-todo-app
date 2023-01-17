@@ -22,6 +22,7 @@
         <Button fx:id="addCategoryBtn" text="Add category"/>
         <Button fx:id="updateUserBtn" text="Update info"/>
         <Button fx:id="friendsBtn"  text="Friends"/>
+        <Button fx:id="leaderBoardBtn"  text="Leader board"/>
 
 
     </children>

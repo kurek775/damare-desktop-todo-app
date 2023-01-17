@@ -37,6 +37,9 @@ public class HomeController {
     private Button addTaskBtn;
 
     @FXML
+    private Button leaderBoardBtn;
+
+    @FXML
     private Text helloUser;
     private Object state;
 
@@ -54,6 +57,7 @@ public class HomeController {
         addCategoryBtn.setOnAction(ControllerUtils::toAddCategory);
         friendsBtn.setOnAction(ControllerUtils::toUsers);
         updateUserBtn.setOnAction(ControllerUtils::toUpdateUser);
+        leaderBoardBtn.setOnAction(ControllerUtils::toLeaderBoard);
         taskListView.setCellFactory(taskListView -> new ListCell<>() {
             @Override
             protected void updateItem(Task task, boolean empty) {
