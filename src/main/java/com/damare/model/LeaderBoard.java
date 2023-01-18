@@ -45,5 +45,7 @@ public class LeaderBoard {
         this.taskCompletedCount = taskCompletedCount;
     }
 
+    public String getUserWithCount() {return "Score: " + taskCompletedCount + " - " + name;}
+
 
 }

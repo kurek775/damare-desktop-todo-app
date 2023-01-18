@@ -30,6 +30,35 @@ public class LeaderBoardController {
 
         loadGlobalLeaderBoardUsers();
         loadFriendsLeaderBoardUsers();
+
+        globalLeaderBoardListView.setCellFactory(taskListView -> new ListCell<>() {
+            @Override
+            protected void updateItem(LeaderBoard leaderBoard, boolean empty) {
+                super.updateItem(leaderBoard, empty);
+                if (!empty) {
+                    setText(leaderBoard.getUserWithCount());
+
+
+
+                } else {
+                    setText(null);
+                    setGraphic(null);
+                }
+            }
+        });
+
+        friendsLeaderBoardListView.setCellFactory(taskListView -> new ListCell<>() {
+            @Override
+            protected void updateItem(LeaderBoard leaderBoard, boolean empty) {
+                super.updateItem(leaderBoard, empty);
+                if (!empty) {
+                    setText(leaderBoard.getUserWithCount());
+                } else {
+                    setText(null);
+                    setGraphic(null);
+                }
+            }
+        });
     }
 
     private void loadGlobalLeaderBoardUsers() {
