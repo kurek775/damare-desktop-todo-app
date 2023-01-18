@@ -9,6 +9,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 
+import java.util.List;
+
 import static com.damare.model.ApplicationState.getInstance;
 
 public class UsersController {
@@ -32,7 +34,7 @@ public class UsersController {
         User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
         homeBtn.setOnAction(ControllerUtils::toHome);
 
-        loadUsers();
+        loadUsers(currentUser);
         loadRequesters();
         loadFriends();
 
@@ -49,7 +51,7 @@ public class UsersController {
                         public void handle(ActionEvent event) {
                             FriendRequest request = new FriendRequest(null, currentUser.getId(), user.getId(), 0, "send");
                             ControllerUtils.addRequest(request);
-                            loadUsers();
+                            loadUsers(currentUser);
                             loadRequesters();
 
 
@@ -65,13 +67,12 @@ public class UsersController {
                 }
             }
         });
-       friendsListView.setCellFactory(taskListView -> new ListCell<>() {
+        friendsListView.setCellFactory(taskListView -> new ListCell<>() {
             @Override
             protected void updateItem(User user, boolean empty) {
                 super.updateItem(user, empty);
                 if (!empty) {
                     setText(user.getName());
-
 
 
                 } else {
@@ -114,12 +115,17 @@ public class UsersController {
     }
 
 
-    private void loadUsers() {
+    private void loadUsers(User currentuser) {
 
         userListView.getItems().clear();
-        this.state = getInstance();
 
-        userListView.getItems().addAll(ControllerUtils.viewAllUsers());
+        List<User> allusers = ControllerUtils.viewAllUsers();
+        for (User user : allusers) {
+            if (user.getId().equals(currentuser.getId())) {
+                allusers.remove(user);
+            }
+        }
+        userListView.getItems().addAll(allusers);
     }
 
     private void loadRequesters() {
@@ -128,6 +134,7 @@ public class UsersController {
         User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
         requestListView.getItems().addAll(ControllerUtils.viewRequesters(currentUser.getId()));
     }
+
     private void loadFriends() {
         friendsListView.getItems().clear();
         this.state = getInstance();

@@ -42,8 +42,7 @@ public class HomeController {
     @FXML
     private Button leaderBoardBtn;
 
-    @FXML
-    private Text helloUser;
+
     private Object state;
 
 
@@ -51,10 +50,10 @@ public class HomeController {
     private void initialize() {
         this.state = getInstance();
         User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
-        helloUser.setText("Hello " + currentUser.getName());
+
         loadMyTasks();
         loadMyCategories();
-        logoutBtn.setStyle("-fx-background-color: #B0266B;");
+
         logoutBtn.setOnAction(ControllerUtils::toLogin);
         addTaskBtn.setOnAction(ControllerUtils::toAddTask);
         addCategoryBtn.setOnAction(ControllerUtils::toAddCategory);

@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="884.0" prefWidth="922.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.damare.main.HomeController">
    <children>
-        <Button fx:id="addTaskBtn" layoutX="482.0" layoutY="842.0" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: WHITE;" text="➕ TASK" />
+        <Button fx:id="addTaskBtn" layoutX="18.0" layoutY="842.0" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: WHITE;" text="➕ TASK" />
         <Button fx:id="logoutBtn" layoutX="18.0" layoutY="14.0" style="-fx-background-color: white;" text="LOGOUT">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -26,7 +26,7 @@
         <ListView fx:id="taskListView" layoutX="18.0" layoutY="186.0" minHeight="300" minWidth="150.0" onMouseClicked="#clickOnLoadedTask" prefHeight="644.0" prefWidth="426.0" />
         <Text layoutX="851.0" layoutY="174.0" text="Categories" />
         <ListView fx:id="categoryListView" layoutX="482.0" layoutY="186.0" minHeight="300" minWidth="150.0" prefHeight="644.0" prefWidth="426.0" />
-        <Button fx:id="addCategoryBtn" layoutX="18.0" layoutY="842.0" style="-fx-background-color: WHITE;" text="➕ CATEGORY" />
+        <Button fx:id="addCategoryBtn" layoutX="482.0" layoutY="842.0" style="-fx-background-color: WHITE;" text="➕ CATEGORY" />
         <Button fx:id="updateUserBtn" layoutX="11.0" layoutY="39.0" style="-fx-background-color: white;" text="UPDATE INFO">
          <font>
             <Font name="System Bold" size="12.0" />
