@@ -103,6 +103,21 @@ public class ControllerUtils {
 
     }
 
+    public static List<LeaderBoard> viewGlobalLeaderBoard() {
+        DbFunctions db = new DbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+
+        return db.readGlobalLeaderBoard(conn);
+    }
+
+
+    public static List<LeaderBoard> viewFriendsLeaderBoard(Integer id) {
+        DbFunctions db = new DbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+
+        return db.readFriendsLeaderBoard(conn, id);
+    }
+
     public static List<FriendRequest> viewRequesters(Integer id) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
@@ -376,4 +391,23 @@ public class ControllerUtils {
             // Handle exception
         }
     }
+
+    @FXML
+    public static void toLeaderBoard(ActionEvent event) {
+        try {
+            // Load the FXML file for the new controller
+            FXMLLoader loader = new FXMLLoader(LeaderBoardController.class.getResource("leaderBoard.fxml"));
+            Parent root = loader.load();
+            LeaderBoardController leaderBoardController = loader.getController();
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene on the stage
+            stage.setScene(new Scene(root));
+        } catch (IOException ex) {
+            // Handle exception
+        }
+    }
+
 }
