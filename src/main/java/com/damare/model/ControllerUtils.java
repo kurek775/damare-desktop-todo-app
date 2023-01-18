@@ -103,6 +103,21 @@ public class ControllerUtils {
 
     }
 
+    public static List<LeaderBoard> viewGlobalLeaderBoard() {
+        DbFunctions db = new DbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+
+        return db.readGlobalLeaderBoard(conn);
+    }
+
+
+    public static List<LeaderBoard> viewFriendsLeaderBoard(Integer id) {
+        DbFunctions db = new DbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+
+        return db.readFriendsLeaderBoard(conn, id);
+    }
+
     public static List<FriendRequest> viewRequesters(Integer id) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");

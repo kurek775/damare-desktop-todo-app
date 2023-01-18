@@ -1,9 +1,6 @@
 package com.damare.main;
 
-import com.damare.model.ApplicationState;
-import com.damare.model.ControllerUtils;
-import com.damare.model.FriendRequest;
-import com.damare.model.User;
+import com.damare.model.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,9 +15,9 @@ public class LeaderBoardController {
 
 
     @FXML
-    private ListView<User> globalLeaderBoardListView;
+    private ListView<LeaderBoard> globalLeaderBoardListView;
     @FXML
-    private ListView<User> friendsLeaderBoardListView;
+    private ListView<LeaderBoard> friendsLeaderBoardListView;
     @FXML
     private Button homeBtn;
     private Object state;
@@ -34,19 +31,21 @@ public class LeaderBoardController {
         loadGlobalLeaderBoardUsers();
         loadFriendsLeaderBoardUsers();
     }
+
     private void loadGlobalLeaderBoardUsers() {
 
         globalLeaderBoardListView.getItems().clear();
         this.state = getInstance();
 
-        globalLeaderBoardListView.getItems().addAll(ControllerUtils.viewAllUsers());
+        globalLeaderBoardListView.getItems().addAll(ControllerUtils.viewGlobalLeaderBoard());
     }
+
     private void loadFriendsLeaderBoardUsers() {
 
         friendsLeaderBoardListView.getItems().clear();
         this.state = getInstance();
-
-        friendsLeaderBoardListView.getItems().addAll(ControllerUtils.viewAllUsers());
+        User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
+        friendsLeaderBoardListView.getItems().addAll(ControllerUtils.viewFriendsLeaderBoard(currentUser.getId()));
     }
 
 }
