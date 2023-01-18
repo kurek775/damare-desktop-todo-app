@@ -1,4 +1,5 @@
 package com.damare.model;
+
 import com.damare.data.DbFunctions;
 import com.damare.main.*;
 import javafx.event.ActionEvent;
@@ -13,19 +14,20 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import org.json.JSONObject;
 import javafx.scene.Node;
+
 import java.io.IOException;
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-
-
 
 
 public class ControllerUtils {
 
 
     public static User findUser(Integer id) {
-       DbFunctions db = new DbFunctions();
-       Connection conn = db.connectDb("devel", "postgre", "Damare123");
+        DbFunctions db = new DbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
         User current = (db.searchUsersById(conn, id));
 
 
@@ -128,7 +130,7 @@ public class ControllerUtils {
     public static List<Category> viewCategories(Integer id) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
-    return db.readAllCategories(conn, id);
+        return db.readAllCategories(conn, id);
 
     }
 
@@ -215,6 +217,18 @@ public class ControllerUtils {
         }
     }
 
+
+    public static String createGoogleLink(Date date, String name, Integer duration) {
+        Integer starthour = 10;
+        Integer endhour = starthour + duration;
+        String dat = date.toString().replace("-", "");
+        String formateddate = dat + "T" + starthour.toString() + "0000" + "/" + dat + "T" + endhour.toString() + "0000";
+        System.out.println(formateddate);
+        String Url = String.format("https://calendar.google.com/calendar/u/0/r/eventedit?text=%s&dates=%s", name, formateddate);
+        return Url;
+    }
+
+
     public static boolean validatePassword(String password, Stage stage) {
         boolean hasNum = false;
         boolean hasCap = false;
@@ -250,7 +264,7 @@ public class ControllerUtils {
     }
 
     @FXML
-   public static void toLogin(ActionEvent event) {
+    public static void toLogin(ActionEvent event) {
         try {
             // Load the FXML file for the new controller
             FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("login.fxml"));
@@ -356,6 +370,7 @@ public class ControllerUtils {
             // Handle exception
         }
     }
+
     @FXML
     public static void toUsers(ActionEvent event) {
         try {

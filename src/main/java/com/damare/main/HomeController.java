@@ -14,8 +14,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import java.awt.Desktop;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import static com.damare.model.ApplicationState.getInstance;
 
@@ -73,9 +76,21 @@ public class HomeController {
                             loadMyTasks();
                         }
                     });
+                    Button google = new Button("google");
+                    google.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            try {
 
+                                Desktop.getDesktop().browse(new URI(ControllerUtils.createGoogleLink(task.getDate(),task.getName(), task.getDuration())));
 
-                    setGraphic(new HBox(delete));
+                            } catch (IOException | URISyntaxException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+                    setGraphic(new HBox(delete,google));
 
                 } else {
                     setText(null);
