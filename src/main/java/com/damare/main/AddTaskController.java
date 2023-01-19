@@ -6,7 +6,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import org.w3c.dom.Text;
 
+import java.awt.event.MouseEvent;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -21,6 +23,8 @@ public class AddTaskController {
     @FXML
     private TextField importanceField;
     @FXML
+    private TextField Priority;
+    @FXML
     private TextField durationField;
     @FXML
     private TextField placeField;
@@ -31,6 +35,10 @@ public class AddTaskController {
     @FXML
     private DatePicker dateField;
     private ApplicationState state;
+
+    @FXML
+    private Text priorityText;
+
 
 
     @FXML
@@ -44,6 +52,8 @@ public class AddTaskController {
 
 
     }
+
+
 
     @FXML
     protected void onAddButtonClick() {
@@ -133,5 +143,7 @@ public class AddTaskController {
         });
     }
 
+    public void updateText(javafx.scene.input.MouseEvent mouseEvent) {
+    }
 }
 

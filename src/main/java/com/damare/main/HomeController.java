@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 import java.awt.Desktop;
 
 import java.io.IOException;
@@ -81,7 +82,7 @@ public class HomeController {
                         public void handle(ActionEvent event) {
                             try {
 
-                                Desktop.getDesktop().browse(new URI(ControllerUtils.createGoogleLink(task.getDate(),task.getName(), task.getDuration())));
+                                Desktop.getDesktop().browse(new URI(ControllerUtils.createGoogleLink(task.getDate(), task.getName(), task.getDuration())));
 
                             } catch (IOException | URISyntaxException e) {
                                 e.printStackTrace();
@@ -97,7 +98,7 @@ public class HomeController {
                         }
                     });
 
-                    setGraphic(new HBox(delete,google,done));
+                    setGraphic(new HBox(delete, google, done));
 
                 } else {
                     setText(null);
@@ -155,7 +156,7 @@ public class HomeController {
         this.state = getInstance();
         Task clicked = taskListView.getSelectionModel().getSelectedItem();
 
-        ActionEvent ae = new ActionEvent(mouseEvent.getSource(),mouseEvent.getTarget());
+        ActionEvent ae = new ActionEvent(mouseEvent.getSource(), mouseEvent.getTarget());
         ApplicationState.getInstance().setCurrentlyEditedTask(clicked);
         if (clicked == null) return;
         ControllerUtils.toUpdateTask(ae);
@@ -171,6 +172,23 @@ public class HomeController {
         } catch (IOException ex) {
 
         }*/
+
+
+    }
+
+    public void clickOnLoadedCategory(MouseEvent mouseEvent) {
+
+        this.state = getInstance();
+        Category clicked = categoryListView.getSelectionModel().getSelectedItem();
+
+        for (Task task : taskListView.getItems()) {
+            if (task.getCatId()==clicked.getId()) {
+
+                taskListView.getItems().add(task);
+            } else {
+                taskListView.getItems().remove(task);
+            }
+        }
 
 
     }

@@ -1,32 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-<VBox alignment="CENTER" prefHeight="247.0" prefWidth="301.0" spacing="10.0" xmlns:fx="http://javafx.com/fxml/1"
-      xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.damare.main.UsersController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <children>
-
-        <Text text="All users"/>
-        <ListView fx:id="userListView" minWidth="120.0" minHeight="200" />
-        <Text text="Friend requests"/>
-        <ListView fx:id="requestListView" minWidth="120.0" minHeight="200" />
-        <Text text="Friends"/>
-        <ListView fx:id="friendsListView" minWidth="120.0" minHeight="200" />
-        <Button fx:id="homeBtn"  text="Home" />
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 
-
-    </children>
-    <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-    </padding>
-
-
-</VBox>
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.damare.main.UsersController">
+   <children>
+      <ImageView fitHeight="854.0" fitWidth="401.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/Friends.png" />
+         </image>
+      </ImageView>
+        <ListView fx:id="userListView" layoutX="7.0" layoutY="669.0" minHeight="171.0" minWidth="120.0" prefHeight="171.0" prefWidth="342.0" />
+        <Text layoutX="110.0" layoutY="260.0" text="Friend requests" />
+        <ListView fx:id="requestListView" layoutX="7.0" layoutY="194.0" minHeight="100.0" minWidth="120.0" prefHeight="100.0" prefWidth="342.0" />
+        <ListView fx:id="friendsListView" layoutX="7.0" layoutY="315.0" minHeight="167.0" minWidth="120.0" prefHeight="328.0" prefWidth="342.0" />
+        <Button fx:id="homeBtn" layoutX="292.0" layoutY="14.0" style="-fx-background-color: #f3f3f3;" text="HOME">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
