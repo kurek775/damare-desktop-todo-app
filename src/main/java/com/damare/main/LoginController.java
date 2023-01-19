@@ -34,8 +34,8 @@ public class LoginController {
     private void initialize() {
 
 
-        loginBtn.setStyle("-fx-background-color: #F2796B;");
-        registerBtn.setStyle("-fx-background-color: #F2796B;");
+       // loginBtn.setStyle("-fx-background-color: #F2796B;");
+       // registerBtn.setStyle("-fx-background-color: #F2796B;");
         registerBtn.setOnAction(ControllerUtils::toRegister);
         loginBtn.setOnAction(e -> {
             User usr = ControllerUtils.loginUser(unameEmailField.getText(), passwordField.getText(), (Stage) loginBtn.getScene().getWindow());
