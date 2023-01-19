@@ -75,6 +75,20 @@ public class UsersController {
                 super.updateItem(user, empty);
                 if (!empty) {
                     setText(user.getName());
+                    Button dec = new Button("-");
+                    dec.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+
+                            User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
+                            ControllerUtils.declineRequest(ControllerUtils.removeFriend(currentUser.getId(), user.getId()));
+                            loadUsers();
+                            loadFriends();
+                        }
+                    });
+
+
+                    setGraphic(new HBox(dec));
 
 
                 } else {

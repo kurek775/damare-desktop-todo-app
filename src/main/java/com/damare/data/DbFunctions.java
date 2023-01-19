@@ -9,8 +9,9 @@ import org.json.JSONObject;
 
 public class DbFunctions {
     Connection conn = null;
+
     public Connection connectDb(String dbname, String user, String pass) {
-        if(conn==null) {
+        if (conn == null) {
             try {
                 Class.forName("org.postgresql.Driver");
                 conn = DriverManager.getConnection("jdbc:postgresql://damare.c5s0nmo9q9mi.us-east-1.rds.amazonaws.com/" + dbname, user, pass);
@@ -112,7 +113,7 @@ public class DbFunctions {
     public void finishTask(Connection conn, Integer id) {
         Statement statement;
         try {
-            String query = String.format("update devel_task set task_finished=true where task_id='%s';",id);
+            String query = String.format("update devel_task set task_finished=true where task_id='%s';", id);
             statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Task finished");
@@ -175,7 +176,7 @@ public class DbFunctions {
         Statement statement;
         try {
             String query = String.format("update devel_friendship set user_id1_requester= %s,user_id2_requested= %s, friendship_status_code= %s, friendship_status_name= '%s'  where friendship_id=%s",
-                   req.getRequesterId(),req.getRequestedId(), req.getStatusCode(),req.getStatusName(), req.getId());
+                    req.getRequesterId(), req.getRequestedId(), req.getStatusCode(), req.getStatusName(), req.getId());
             statement = conn.createStatement();
             statement.executeUpdate(query);
             System.out.println("Data Updated");
@@ -216,15 +217,14 @@ public class DbFunctions {
 
     public User searchUsersById(Connection conn, int id) {
         Statement statement;
-        User usr = new User(null,null,null,null);
+        User usr = new User(null, null, null, null);
         ResultSet rs = null;
         try {
             String query = String.format("select * from devel_user where user_id='%s'", id);
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()) {
-                usr =new User(rs.getInt("user_id"),rs.getString("username"),rs.getString("user_email"),rs.getString("user_passwd"));
-
+                usr = new User(rs.getInt("user_id"), rs.getString("username"), rs.getString("user_email"), rs.getString("user_passwd"));
 
 
                 return usr;
@@ -246,7 +246,7 @@ public class DbFunctions {
 
     public User searchByNameOrMail(Connection conn, String name) {
         Statement statement;
-        User usr = new User(null,null,null,null);
+        User usr = new User(null, null, null, null);
         ResultSet rs = null;
         try {
 
@@ -254,8 +254,7 @@ public class DbFunctions {
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()) {
-                usr =new User(rs.getInt("user_id"),rs.getString("username"),rs.getString("user_email"),rs.getString("user_passwd"));
-
+                usr = new User(rs.getInt("user_id"), rs.getString("username"), rs.getString("user_email"), rs.getString("user_passwd"));
 
 
                 return usr;
@@ -350,7 +349,7 @@ public class DbFunctions {
         ResultSet rs = null;
         try {
 
-            String query = String.format("with friends as (select fu.user_id from devel_user u inner join devel_friendship f on (u.user_id=f.user_id1_requester or u.user_id=f.user_id2_requested) inner join devel_user fu on (fu.user_id=f.user_id1_requester or fu.user_id=f.user_id2_requested) where (u.user_id=%s) and fu.user_id<>u.user_id) select * from devel_user u left join friends f on u.user_id=f.user_id where f.user_id is null and u.user_id<>%s",id,id);
+            String query = String.format("with friends as (select fu.user_id from devel_user u inner join devel_friendship f on (u.user_id=f.user_id1_requester or u.user_id=f.user_id2_requested) inner join devel_user fu on (fu.user_id=f.user_id1_requester or fu.user_id=f.user_id2_requested) where (u.user_id=%s) and fu.user_id<>u.user_id) select * from devel_user u left join friends f on u.user_id=f.user_id where f.user_id is null and u.user_id<>%s", id, id);
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             Integer i = 0;
@@ -376,6 +375,7 @@ public class DbFunctions {
         }
         return list;
     }
+
     public List<User> readAllFriends(Connection conn, Integer id) {
         Statement statement;
         List<User> list = new ArrayList<>();
@@ -408,6 +408,7 @@ public class DbFunctions {
         }
         return list;
     }
+
     public List<FriendRequest> readRequesters(Connection conn, Integer id) {
         Statement statement;
         List<FriendRequest> list = new ArrayList<>();
@@ -441,6 +442,37 @@ public class DbFunctions {
         return list;
     }
 
+
+    public Integer getFriendshipId(Connection conn, Integer currentuid, Integer friendid) {
+        Statement statement;
+        Integer reqid=999999;
+        ResultSet rs = null;
+        try {
+
+            String query = String.format("with all_friendships as (select f.friendship_id,f.user_id1_requester,f.user_id2_requested from devel_user u inner join devel_friendship f on (u.user_id=f.user_id1_requester or u.user_id=f.user_id2_requested) where (u.user_id=%s) and f.friendship_status_code=1) select f.friendship_id from all_friendships f where (f.user_id1_requester=%s or f.user_id2_requested=%s)", currentuid, friendid, friendid);
+
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            Integer i = 0;
+            while (rs.next()) {
+                reqid = rs.getInt("friendship_id");
+
+            }
+            return reqid ;
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return reqid;
+    }
+
     /* ALL  */
     public void deleteRowByAnything(Connection conn, String table_name, String cellname, int id) {
         Statement statement;
@@ -461,6 +493,7 @@ public class DbFunctions {
             }
         }
     }
+
     public List<LeaderBoard> readGlobalLeaderBoard(Connection conn) {
         Statement statement;
         List<LeaderBoard> list = new ArrayList<>();

@@ -157,7 +157,12 @@ public class ControllerUtils {
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
         db.deleteRowByAnything(conn, "devel_category", "category_id", id);
     }
+    public static int removeFriend(Integer currentuid, Integer friendid) {
+        DbFunctions db = new DbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+        return  db.getFriendshipId(conn,currentuid,friendid);
 
+    }
     public static User loginUser(String lname, String password, Stage stage) {
 
         DbFunctions db = new DbFunctions();

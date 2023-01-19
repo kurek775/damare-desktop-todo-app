@@ -35,12 +35,8 @@ public class AddTaskController {
     private ApplicationState state;
 
 
-
     @FXML
     private Slider Prior_new;
-
-
-
 
 
     @FXML
@@ -56,7 +52,6 @@ public class AddTaskController {
     }
 
 
-
     @FXML
     protected void onAddButtonClick(ActionEvent event) {
         this.state = getInstance();
@@ -66,18 +61,18 @@ public class AddTaskController {
 
         String name = nameField.getText();
 
-        int importance = (int)Prior_new.getValue();
+        int importance = (int) Prior_new.getValue();
 
         int duration = Integer.parseInt(durationField.getText());
 
         String place = placeField.getText();
-        if(place.isEmpty()) {
+        if (place.isEmpty()) {
             place = "-";
         }
 
         String description = descriptionField.getText();
-        if(description.isEmpty()) {
-            description="-";
+        if (description.isEmpty()) {
+            description = "-";
         }
 
         Date dateTime = Date.from(dateField.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -85,10 +80,12 @@ public class AddTaskController {
         int currentUserId = currentUser.getId();
 
         int categoryId;
-        if(catIdField.getValue().equals(null)) {
+
+        if (catIdField.getValue() == null) {
             categoryId = 0;
         }
-        else {
+
+        else{
             categoryId = catIdField.getValue().getId();
         }
 
@@ -145,9 +142,9 @@ public class AddTaskController {
     }
 
     public void updateText(javafx.scene.input.MouseEvent mouseEvent) {
-        priorityTex.setText(String.valueOf((int)Prior_new.getValue()));
+        priorityTex.setText(String.valueOf((int) Prior_new.getValue()));
 
-        
+
     }
 
 }

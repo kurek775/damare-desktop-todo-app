@@ -69,7 +69,7 @@ public class HomeController {
         this.state = getInstance();
         User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
 
-        loadMyTasks();
+        loadMyTasks(9999);
         loadMyCategories();
         lineChart();
 
@@ -92,7 +92,7 @@ public class HomeController {
                         @Override
                         public void handle(ActionEvent event) {
                             ControllerUtils.removeTask(task.getId());
-                            loadMyTasks();
+                            loadMyTasks(9999);
                             lineChart();
                         }
                     });
@@ -114,7 +114,7 @@ public class HomeController {
                         @Override
                         public void handle(ActionEvent event) {
                             ControllerUtils.finishTask(task.getId());
-                            loadMyTasks();
+                            loadMyTasks(9999);
                         }
                     });
 
@@ -156,12 +156,22 @@ public class HomeController {
     }
 
 
-    private void loadMyTasks() {
-
+    private void loadMyTasks(Integer id) {
         taskListView.getItems().clear();
         this.state = getInstance();
         User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
-        taskListView.getItems().addAll(ControllerUtils.viewTasks(currentUser.getId()));
+        if (id == 9999) {
+            taskListView.getItems().addAll(ControllerUtils.viewTasks(currentUser.getId()));
+        } else {
+            for (Task tsk : ControllerUtils.viewTasks(currentUser.getId())) {
+                if (tsk.getCatId() == id) {
+                    taskListView.getItems().add(tsk);
+                }
+            }
+
+        }
+
+
     }
 
     private void loadMyCategories() {
@@ -184,11 +194,10 @@ public class HomeController {
 
     }
 
-    public void clickOnLoadedCategory(MouseEvent mouseEvent) {
+    public void clickOnLoadedCategory() {
         this.state = getInstance();
         Category clicked = categoryListView.getSelectionModel().getSelectedItem();
-
-        System.out.println(clicked.getId());
+        loadMyTasks(clicked.getId());
         if (clicked == null) return;
 
 
