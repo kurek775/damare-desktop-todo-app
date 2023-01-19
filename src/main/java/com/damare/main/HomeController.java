@@ -234,6 +234,7 @@ public class HomeController {
         XYChart.Series series = new XYChart.Series();
 
         int pocetDni = getNumberOfDaysInMonth(LocalDate.now().getYear(), LocalDate.now().getMonthValue());
+        series.setName("Tasks per day");
         for (int i = 1; i <= pocetDni; i++) {
 
             series.getData().add(new XYChart.Data(String.valueOf(i), intArray[i]));
