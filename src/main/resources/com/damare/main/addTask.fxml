@@ -18,7 +18,7 @@
         <Label text="place" />
         <TextField fx:id="placeField" />
         <Label text="category" />
-        <TextField fx:id="catIdField" />
+        <ComboBox fx:id="catIdField" />
         <Label text="description" />
         <TextField fx:id="descriptionField" />
         <Label text="date" />

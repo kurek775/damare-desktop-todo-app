@@ -1,13 +1,11 @@
 package com.damare.main;
 
-import com.damare.model.Task;
-import com.damare.model.User;
-import com.damare.model.ApplicationState;
-import com.damare.model.ControllerUtils;
+import com.damare.model.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 
 import java.time.ZoneId;
 import java.util.Date;
@@ -27,7 +25,7 @@ public class AddTaskController {
     @FXML
     private TextField placeField;
     @FXML
-    private TextField catIdField;
+    private ComboBox<Category> catIdField;
     @FXML
     private TextField descriptionField;
     @FXML
@@ -41,7 +39,8 @@ public class AddTaskController {
         this.state = getInstance();
         User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
         homeBtn.setOnAction(ControllerUtils::toHome);
-
+        loadMyCategories();
+        formatComboBox();
 
     }
 
@@ -54,25 +53,18 @@ public class AddTaskController {
 
         String name = nameField.getText();
 
-        /*
-        int importance = 0;
-        if (importanceField.getText().isEmpty()) {
-            importance = 99999;
-        }
-        else {
-        */
         int importance = Integer.parseInt(importanceField.getText());
-        //}
 
         int duration = Integer.parseInt(durationField.getText());
         String place = placeField.getText();
         String description = descriptionField.getText();
         Date dateTime = Date.from(dateField.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
         int currentUserId = currentUser.getId();
+        //int categoryId = catIdField.getValue();
 
         Task task = new Task(
                 null,
-                Integer.parseInt(catIdField.getText()),
+                Integer.parseInt(catIdField.getItems().toString()),
                 currentUserId,
                 importance,
                 duration,
@@ -97,6 +89,28 @@ public class AddTaskController {
         if(!durationField.getText().isEmpty() && !durationField.getText().matches("\\d\\d?\\d?")) {
             System.out.println("Duration has to be a number from 0 to 999.");
         }
+    }
+
+    private void loadMyCategories() {
+        catIdField.getItems().clear();
+        this.state = getInstance();
+        User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
+        catIdField.getItems().addAll(ControllerUtils.viewCategories(currentUser.getId()));
+    }
+
+    private void formatComboBox() {
+        catIdField.setCellFactory(taskListView -> new ListCell<>() {
+            @Override
+            protected void updateItem(Category category, boolean empty) {
+                super.updateItem(category, empty);
+                if (!empty) {
+                    setText(category.getName());
+                } else {
+                    setText(null);
+                    setGraphic(null);
+                }
+            }
+        });
     }
 
 }
