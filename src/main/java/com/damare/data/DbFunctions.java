@@ -19,8 +19,7 @@ public class DbFunctions {
                 } else {
                     System.out.println("Connection Failed");
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println(e);
             }
         }

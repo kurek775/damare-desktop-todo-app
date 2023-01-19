@@ -1,6 +1,7 @@
 package com.damare.main;
 
 import com.damare.model.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -30,7 +31,7 @@ public class AddCategoryController {
     }
 
     @FXML
-    protected void onAddButtonClick() {
+    protected void onAddButtonClick(ActionEvent event) {
         this.state = getInstance();
         User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
 
@@ -42,7 +43,7 @@ public class AddCategoryController {
             ControllerUtils.addCategory(category);
 
         }
-
+        ControllerUtils.toHome(event);
 
     }
 
