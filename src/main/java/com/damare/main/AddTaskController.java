@@ -60,7 +60,13 @@ public class AddTaskController {
         String description = descriptionField.getText();
         Date dateTime = Date.from(dateField.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
         int currentUserId = currentUser.getId();
-        int categoryId = catIdField.getValue().getId();
+        int categoryId;
+        if(catIdField.getValue().equals(null)) {
+            categoryId = 0;
+        }
+        else {
+            categoryId = catIdField.getValue().getId();
+        }
 
         Task task = new Task(
                 null,
@@ -110,6 +116,7 @@ public class AddTaskController {
                     setGraphic(null);
                 }
             }
+
         });
     }
 
