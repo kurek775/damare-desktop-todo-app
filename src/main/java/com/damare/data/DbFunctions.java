@@ -280,7 +280,7 @@ public class DbFunctions {
         ResultSet rs = null;
         try {
 
-            String query = String.format("select * from devel_task where task_user_id= %s", id);
+            String query = String.format("select * from devel_task where task_user_id= %s and task_finished=false", id);
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             Integer i = 0;
