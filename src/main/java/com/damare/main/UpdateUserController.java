@@ -40,8 +40,8 @@ public class UpdateUserController {
         nameField.setText(currentUser.getName());
         emailField.setText(currentUser.getEmail());
         passwordField.setText(currentUser.getPassword());
-        homeBtn.setStyle("-fx-background-color: #00ff00;");
-        saveBtn.setStyle("-fx-background-color: #B0266B;");
+        //homeBtn.setStyle("-fx-background-color: #00ff00;");
+        //saveBtn.setStyle("-fx-background-color: #B0266B;");
         homeBtn.setOnAction(ControllerUtils::toHome);
     }
 
