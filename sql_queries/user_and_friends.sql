@@ -1,3 +1,4 @@
+
 select
     fu.user_id
     ,fu.username
