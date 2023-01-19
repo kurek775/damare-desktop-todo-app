@@ -100,7 +100,7 @@ public class HomeController {
                         public void handle(ActionEvent event) {
                             try {
 
-                                Desktop.getDesktop().browse(new URI(ControllerUtils.createGoogleLink(task.getDate(),task.getName(), task.getDuration())));
+                                Desktop.getDesktop().browse(new URI(ControllerUtils.createGoogleLink(task.getDate(), task.getName(), task.getDuration())));
 
                             } catch (IOException | URISyntaxException e) {
                                 e.printStackTrace();
@@ -116,7 +116,7 @@ public class HomeController {
                         }
                     });
 
-                    setGraphic(new HBox(delete,google,done));
+                    setGraphic(new HBox(delete, google, done));
 
                 } else {
                     setText(null);
@@ -174,107 +174,41 @@ public class HomeController {
         this.state = getInstance();
         Task clicked = taskListView.getSelectionModel().getSelectedItem();
 
-        ActionEvent ae = new ActionEvent(mouseEvent.getSource(),mouseEvent.getTarget());
+        ActionEvent ae = new ActionEvent(mouseEvent.getSource(), mouseEvent.getTarget());
         ApplicationState.getInstance().setCurrentlyEditedTask(clicked);
         if (clicked == null) return;
         ControllerUtils.toUpdateTask(ae);
-       /* try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("updateTask.fxml"));
-            Parent root = loader.load();
-            UpdateTaskController updateTaskController = loader.getController();
-
-            Stage stage = (Stage) logoutBtn.getScene().getWindow();
-
-            stage.setScene(new Scene(root));
-        } catch (IOException ex) {
-
-        }*/
 
 
     }
 
-    private void lineChart(){
+    public void clickOnLoadedCategory(MouseEvent mouseEvent) {
+        this.state = getInstance();
+        Category clicked = categoryListView.getSelectionModel().getSelectedItem();
+
+        System.out.println(clicked.getId());
+        if (clicked == null) return;
+
+
+    }
+
+    private void lineChart() {
         this.state = getInstance();
         User currentUser = getInstance().getCurrentlyLoggedUser();
 
-        int[] intArray = new int[]{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        int[] intArray = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 
         Collection<Task> list = taskListView.getItems();
-        for (Task task: list){
+        for (Task task : list) {
             Date date = task.getDate();
-            if (date.getYear()+1900==LocalDate.now().getYear()){
+            if (date.getYear() + 1900 == LocalDate.now().getYear()) {
                 System.out.println(task.getDate().getYear());
                 System.out.println(LocalDate.now().getYear());
-                if (date.getMonth()+1==LocalDate.now().getMonthValue()){
+                if (date.getMonth() + 1 == LocalDate.now().getMonthValue()) {
                     int datum = date.getDate();
 
-                    switch (datum){
-                        case 1: intArray[1]++;
-                        break;
-                        case 2: intArray[2]++;
-                            break;
-                        case 3: intArray[3]++;
-                            break;
-                        case 4: intArray[4]++;
-                            break;
-                        case 5: intArray[5]++;
-                            break;
-                        case 6: intArray[6]++;
-                            break;
-                        case 7: intArray[7]++;
-                            break;
-                        case 8: intArray[8]++;
-                            break;
-                        case 9: intArray[9]++;
-                            break;
-                        case 10: intArray[10]++;
-                            break;
-                        case 11: intArray[11]++;
-                            break;
-                        case 12: intArray[12]++;
-                            break;
-                        case 13: intArray[13]++;
-                            break;
-                        case 14: intArray[14]++;
-                            break;
-                        case 15: intArray[15]++;
-                            break;
-                        case 16: intArray[16]++;
-                            break;
-                        case 17: intArray[17]++;
-                            break;
-                        case 18: intArray[18]++;
-                            break;
-                        case 19: intArray[19]++;
-                            break;
-                        case 20: intArray[20]++;
-                            break;
-                        case 21: intArray[21]++;
-                            break;
-                        case 22: intArray[22]++;
-                            break;
-                        case 23: intArray[23]++;
-                            break;
-                        case 24: intArray[24]++;
-                            break;
-                        case 25: intArray[25]++;
-                            break;
-                        case 26: intArray[26]++;
-                            break;
-                        case 27: intArray[27]++;
-                            break;
-                        case 28: intArray[28]++;
-                            break;
-                        case 29: intArray[29]++;
-                            break;
-                        case 30: intArray[30]++;
-                            break;
-                        case 31: intArray[31]++;
-                            break;
-
-                    }
+                    intArray[datum]++;
                 }
             }
         }
@@ -291,8 +225,8 @@ public class HomeController {
 
 
     }
-    public static int getNumberOfDaysInMonth(int year,int month)
-    {
+
+    public static int getNumberOfDaysInMonth(int year, int month) {
         YearMonth yearMonthObject = YearMonth.of(year, month);
         int daysInMonth = yearMonthObject.lengthOfMonth();
         return daysInMonth;

@@ -65,23 +65,10 @@ public class UpdateTaskController {
             System.out.println("NAH");
         } else {
             Task task = new Task(currentTask.getId(), Integer.parseInt(catIdField.getText()), currentUser.getId(), Integer.parseInt(importanceField.getText()), Integer.parseInt(durationField.getText()), nameField.getText(), placeField.getText(),
-                    descriptionField.getText(), Date.from(dateField.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), true);
+                    descriptionField.getText(), Date.from(dateField.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), false);
 
             ControllerUtils.updateTask(task);
-            try {
 
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
-                Parent root = loader.load();
-                HomeController homeController = loader.getController();
-
-
-                Stage stage = (Stage) nameField.getScene().getWindow();
-
-                stage.setScene(new Scene(root));
-            } catch (IOException ex) {
-
-            }
 
         }
 
