@@ -108,6 +108,26 @@ public class DbFunctions {
         }
     }
 
+    public void finishTask(Connection conn, Integer id) {
+        Statement statement;
+        try {
+            String query = String.format("update devel_task set task_finished=true where task_id='%s';",id);
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Task finished");
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     public void updateTaskRow(Connection conn, Task task) {
         Statement statement;
         try {
@@ -260,7 +280,7 @@ public class DbFunctions {
         ResultSet rs = null;
         try {
 
-            String query = String.format("select * from devel_task where task_user_id= %s", id);
+            String query = String.format("select * from devel_task where task_user_id= %s and task_finished=false", id);
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             Integer i = 0;

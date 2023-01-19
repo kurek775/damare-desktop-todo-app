@@ -88,8 +88,16 @@ public class HomeController {
                             }
                         }
                     });
+                    Button done = new Button("done");
+                    done.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            ControllerUtils.finishTask(task.getId());
+                            loadMyTasks();
+                        }
+                    });
 
-                    setGraphic(new HBox(delete,google));
+                    setGraphic(new HBox(delete,google,done));
 
                 } else {
                     setText(null);

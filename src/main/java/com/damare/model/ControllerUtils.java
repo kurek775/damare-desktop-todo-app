@@ -81,6 +81,12 @@ public class ControllerUtils {
         db.updateTaskRow(conn, task);
     }
 
+    public static void finishTask(Integer id) {
+        DbFunctions db = new DbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+        db.finishTask(conn, id);
+    }
+
     public static List<Task> viewTasks(Integer id) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
