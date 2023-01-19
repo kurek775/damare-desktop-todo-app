@@ -108,6 +108,26 @@ public class DbFunctions {
         }
     }
 
+    public void finishTask(Connection conn, Integer id) {
+        Statement statement;
+        try {
+            String query = String.format("update devel_task set task_finished=true where task_id='%s';",id);
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Task finished");
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     public void updateTaskRow(Connection conn, Task task) {
         Statement statement;
         try {
