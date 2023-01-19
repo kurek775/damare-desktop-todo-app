@@ -93,6 +93,7 @@ public class HomeController {
                         public void handle(ActionEvent event) {
                             ControllerUtils.removeTask(task.getId());
                             loadMyTasks();
+                            lineChart();
                         }
                     });
                     Button google = new Button("google");
