@@ -21,8 +21,6 @@ public class AddTaskController {
     private Button homeBtn;
     @FXML
     private TextField nameField;
-    @FXML
-    private TextField importanceField;
 
     @FXML
     private TextField durationField;
@@ -68,7 +66,7 @@ public class AddTaskController {
 
         String name = nameField.getText();
 
-        int importance = Integer.parseInt(importanceField.getText());
+        int importance = (int)Prior_new.getValue();
 
         int duration = Integer.parseInt(durationField.getText());
 
@@ -115,9 +113,7 @@ public class AddTaskController {
         if (nameField.getText().isEmpty()) {
             System.out.println("Name is required.");
         }
-        if (!importanceField.getText().isEmpty() && !importanceField.getText().matches("\\d\\d?")) {
-            System.out.println("Importance has to be a number from 0 to 99.");
-        }
+
         if (!durationField.getText().isEmpty() && !durationField.getText().matches("\\d\\d?\\d?")) {
             System.out.println("Duration has to be a number from 0 to 999.");
         }
@@ -149,7 +145,9 @@ public class AddTaskController {
 
     public void updateText(javafx.scene.input.MouseEvent mouseEvent) {
         priorityTex.setText(String.valueOf((int)Prior_new.getValue()));
+
         
     }
+
 }
 
