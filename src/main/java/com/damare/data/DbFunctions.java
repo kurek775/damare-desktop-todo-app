@@ -8,19 +8,21 @@ import com.damare.model.*;
 import org.json.JSONObject;
 
 public class DbFunctions {
+    Connection conn = null;
     public Connection connectDb(String dbname, String user, String pass) {
-        Connection conn = null;
-        try {
-            Class.forName("org.postgresql.Driver");
-            conn = DriverManager.getConnection("jdbc:postgresql://damare.c5s0nmo9q9mi.us-east-1.rds.amazonaws.com/" + dbname, user, pass);
-            if (conn != null) {
-                System.out.println("Connection Established");
-            } else {
-                System.out.println("Connection Failed");
+        if(conn==null) {
+            try {
+                Class.forName("org.postgresql.Driver");
+                conn = DriverManager.getConnection("jdbc:postgresql://damare.c5s0nmo9q9mi.us-east-1.rds.amazonaws.com/" + dbname, user, pass);
+                if (conn != null) {
+                    System.out.println("Connection Established");
+                } else {
+                    System.out.println("Connection Failed");
+                }
             }
-
-        } catch (Exception e) {
-            System.out.println(e);
+            catch (Exception e) {
+                System.out.println(e);
+            }
         }
         return conn;
     }
@@ -343,13 +345,13 @@ public class DbFunctions {
         return list;
     }
 
-    public List<User> readAllUsers(Connection conn) {
+    public List<User> readAllUsers(Connection conn, Integer id) {
         Statement statement;
         List<User> list = new ArrayList<>();
         ResultSet rs = null;
         try {
 
-            String query = String.format("select * from devel_user");
+            String query = String.format("with friends as (select fu.user_id from devel_user u inner join devel_friendship f on (u.user_id=f.user_id1_requester or u.user_id=f.user_id2_requested) inner join devel_user fu on (fu.user_id=f.user_id1_requester or fu.user_id=f.user_id2_requested) where (u.user_id=%s) and fu.user_id<>u.user_id) select * from devel_user u left join friends f on u.user_id=f.user_id where f.user_id is null and u.user_id<>%s",id,id);
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             Integer i = 0;

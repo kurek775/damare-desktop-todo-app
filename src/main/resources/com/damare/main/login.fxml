@@ -27,11 +27,11 @@
          </image></ImageView>
         <TextField fx:id="unameEmailField" focusTraversable="false" prefHeight="26.0" prefWidth="543.0" promptText="uname or email" />
         <PasswordField fx:id="passwordField" focusTraversable="false" prefHeight="26.0" prefWidth="480.0" promptText="password" />
-        <Button fx:id="loginBtn" prefHeight="26.0" prefWidth="264.0" text="Login">
+        <Button fx:id="loginBtn" prefHeight="26.0" prefWidth="264.0" style="-fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-style: solid; -fx-background-color: F2796B;" text="Login">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
-        <Button fx:id="registerBtn" prefHeight="26.0" prefWidth="264.0" text="Register">
+        <Button fx:id="registerBtn" prefHeight="26.0" prefWidth="264.0" style="-fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-style: solid; -fx-background-color: F2796B;" text="Register">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>

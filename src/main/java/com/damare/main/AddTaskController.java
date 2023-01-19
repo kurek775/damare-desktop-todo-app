@@ -1,14 +1,14 @@
 package com.damare.main;
 
-import com.damare.model.Task;
-import com.damare.model.User;
-import com.damare.model.ApplicationState;
-import com.damare.model.ControllerUtils;
+import com.damare.model.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import org.w3c.dom.Text;
 
+import java.awt.event.MouseEvent;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -23,16 +23,22 @@ public class AddTaskController {
     @FXML
     private TextField importanceField;
     @FXML
+    private TextField Priority;
+    @FXML
     private TextField durationField;
     @FXML
     private TextField placeField;
     @FXML
-    private TextField catIdField;
+    private ComboBox<Category> catIdField;
     @FXML
     private TextField descriptionField;
     @FXML
     private DatePicker dateField;
     private ApplicationState state;
+
+    @FXML
+    private Text priorityText;
+
 
 
     @FXML
@@ -41,9 +47,13 @@ public class AddTaskController {
         this.state = getInstance();
         User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
         homeBtn.setOnAction(ControllerUtils::toHome);
+        loadMyCategories();
+        formatComboBox();
 
 
     }
+
+
 
     @FXML
     protected void onAddButtonClick() {
@@ -54,25 +64,35 @@ public class AddTaskController {
 
         String name = nameField.getText();
 
-        /*
-        int importance = 0;
-        if (importanceField.getText().isEmpty()) {
-            importance = 99999;
-        }
-        else {
-        */
         int importance = Integer.parseInt(importanceField.getText());
-        //}
 
         int duration = Integer.parseInt(durationField.getText());
+
         String place = placeField.getText();
+        if(place.isEmpty()) {
+            place = "-";
+        }
+
         String description = descriptionField.getText();
+        if(description.isEmpty()) {
+            description="-";
+        }
+
         Date dateTime = Date.from(dateField.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+
         int currentUserId = currentUser.getId();
+
+        int categoryId;
+        if(catIdField.getValue().equals(null)) {
+            categoryId = 0;
+        }
+        else {
+            categoryId = catIdField.getValue().getId();
+        }
 
         Task task = new Task(
                 null,
-                Integer.parseInt(catIdField.getText()),
+                categoryId,
                 currentUserId,
                 importance,
                 duration,
@@ -87,17 +107,43 @@ public class AddTaskController {
 
     }
 
-    private void inputVerification(){
-        if(nameField.getText().isEmpty() ){
+    private void inputVerification() {
+        if (nameField.getText().isEmpty()) {
             System.out.println("Name is required.");
         }
-        if(!importanceField.getText().isEmpty() && !importanceField.getText().matches("\\d\\d?")) {
+        if (!importanceField.getText().isEmpty() && !importanceField.getText().matches("\\d\\d?")) {
             System.out.println("Importance has to be a number from 0 to 99.");
         }
-        if(!durationField.getText().isEmpty() && !durationField.getText().matches("\\d\\d?\\d?")) {
+        if (!durationField.getText().isEmpty() && !durationField.getText().matches("\\d\\d?\\d?")) {
             System.out.println("Duration has to be a number from 0 to 999.");
         }
     }
 
+    private void loadMyCategories() {
+        catIdField.getItems().clear();
+        this.state = getInstance();
+        User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
+        catIdField.getItems().addAll(ControllerUtils.viewCategories(currentUser.getId()));
+    }
+
+    private void formatComboBox() {
+        catIdField.setCellFactory(catIdField -> new ListCell<>() {
+            @Override
+            protected void updateItem(Category category, boolean empty) {
+                super.updateItem(category, empty);
+                if (!empty) {
+                    setText(category.getName());
+
+                } else {
+                    setText(null);
+                    setGraphic(null);
+                }
+            }
+
+        });
+    }
+
+    public void updateText(javafx.scene.input.MouseEvent mouseEvent) {
+    }
 }
 

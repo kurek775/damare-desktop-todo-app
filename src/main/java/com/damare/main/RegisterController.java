@@ -32,8 +32,8 @@ public class RegisterController {
     private void initialize() {
 
 
-        registerBtn.setStyle("-fx-background-color: #F2796B;");
-        loginBtn.setStyle("-fx-background-color: #F2796B;");
+       // registerBtn.setStyle("-fx-background-color: #F2796B;");
+       // loginBtn.setStyle("-fx-background-color: #F2796B;");
         loginBtn.setOnAction(ControllerUtils::toLogin);
         registerBtn.setOnAction(e -> {
 

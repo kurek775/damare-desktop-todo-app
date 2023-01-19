@@ -34,7 +34,7 @@ public class UsersController {
         User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
         homeBtn.setOnAction(ControllerUtils::toHome);
 
-        loadUsers(currentUser);
+        loadUsers();
         loadRequesters();
         loadFriends();
 
@@ -49,17 +49,19 @@ public class UsersController {
                     add.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
+
                             FriendRequest request = new FriendRequest(null, currentUser.getId(), user.getId(), 0, "send");
                             ControllerUtils.addRequest(request);
-                            loadUsers(currentUser);
+                            userListView.getItems().remove(user);
                             loadRequesters();
-
+                            add.setDisable(true);
 
                         }
                     });
 
 
                     setGraphic(new HBox(add));
+
 
                 } else {
                     setText(null);
@@ -97,13 +99,25 @@ public class UsersController {
                             req.setStatusCode(1);
                             req.setStatusName("accepted");
                             ControllerUtils.updateFriendRequest(req);
-                            loadRequesters();
+                            requestListView.getItems().remove(req);
+                            loadFriends();
+                        }
+                    });
+
+                    Button dec = new Button("DECLINE");
+                    dec.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+
+                            ControllerUtils.declineRequest(req.getId());
+                            requestListView.getItems().remove(req);
+
                             loadFriends();
                         }
                     });
 
 
-                    setGraphic(new HBox(add));
+                    setGraphic(new HBox(add, dec));
 
                 } else {
                     setText(null);
@@ -115,18 +129,14 @@ public class UsersController {
     }
 
 
-    private void loadUsers(User currentuser) {
+    private void loadUsers() {
 
         userListView.getItems().clear();
-
-        List<User> allusers = ControllerUtils.viewAllUsers();
-        for (User user : allusers) {
-            if (user.getId().equals(currentuser.getId())) {
-                allusers.remove(user);
-            }
-        }
-        userListView.getItems().addAll(allusers);
+        this.state = getInstance();
+        User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
+        userListView.getItems().addAll(ControllerUtils.viewAllUsers(currentUser.getId()));
     }
+
 
     private void loadRequesters() {
         requestListView.getItems().clear();

@@ -1,16 +1,13 @@
 select
-	 u.user_id
-	,u.username
-	,fu.user_id as friends_id
-	,fu.username as friends_name
-
+    fu.user_id
+    ,fu.username
+    ,fu.user_email
+    ,fu.user_passwd
 from devel_user u
-left join devel_friendship f
-	on (u.user_id=f.user_id1_requester 
-	or u.user_id=f.user_id2_requested)
-left join devel_user fu
-	on (f.user_id1_requester=fu.user_id 
-	or f.user_id2_requested=fu.user_id)
-	and u.user_id<>fu.user_id
-	
-where friendship_status_code=1 --"accepted"
+inner join devel_friendship f
+    on (u.user_id=f.user_id1_requester or u.user_id=f.user_id2_requested)
+inner join devel_user fu
+    on (fu.user_id=f.user_id1_requester or fu.user_id=f.user_id2_requested)
+where (u.user_id=%s)
+and f.friendship_status_code=1 --accepted
+and fu.user_id<>u.user_id
