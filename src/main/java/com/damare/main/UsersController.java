@@ -54,6 +54,7 @@ public class UsersController {
                             ControllerUtils.addRequest(request);
                             userListView.getItems().remove(user);
                             loadRequesters();
+                            add.setDisable(true);
 
                         }
                     });
