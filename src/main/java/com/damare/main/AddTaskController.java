@@ -57,10 +57,21 @@ public class AddTaskController {
         int importance = Integer.parseInt(importanceField.getText());
 
         int duration = Integer.parseInt(durationField.getText());
+
         String place = placeField.getText();
+        if(place.isEmpty()) {
+            place = "-";
+        }
+
         String description = descriptionField.getText();
+        if(description.isEmpty()) {
+            description="-";
+        }
+
         Date dateTime = Date.from(dateField.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+
         int currentUserId = currentUser.getId();
+
         int categoryId;
         if(catIdField.getValue().equals(null)) {
             categoryId = 0;
