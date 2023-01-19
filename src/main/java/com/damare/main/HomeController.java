@@ -74,6 +74,7 @@ public class HomeController {
         lineChart();
 
         logoutBtn.setOnAction(ControllerUtils::toLogin);
+
         addTaskBtn.setOnAction(ControllerUtils::toAddTask);
         addCategoryBtn.setOnAction(ControllerUtils::toAddCategory);
         friendsBtn.setOnAction(ControllerUtils::toUsers);
