@@ -60,11 +60,11 @@ public class AddTaskController {
         String description = descriptionField.getText();
         Date dateTime = Date.from(dateField.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
         int currentUserId = currentUser.getId();
-        //int categoryId = catIdField.getValue();
+        int categoryId = catIdField.getValue().getId();
 
         Task task = new Task(
                 null,
-                Integer.parseInt(catIdField.getItems().toString()),
+                categoryId,
                 currentUserId,
                 importance,
                 duration,
