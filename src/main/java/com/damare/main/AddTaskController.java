@@ -39,13 +39,6 @@ public class AddTaskController {
     @FXML
     private Text priorityText;
 
-    @FXML
-    void updateText(MouseEvent event) {
-
-    //priorityText.setText(Priority.getValue());
-
-
-    }
 
 
     @FXML
@@ -150,5 +143,7 @@ public class AddTaskController {
         });
     }
 
+    public void updateText(javafx.scene.input.MouseEvent mouseEvent) {
+    }
 }
 
