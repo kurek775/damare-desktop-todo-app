@@ -3,6 +3,7 @@ package com.damare.main;
 import com.damare.model.User;
 import com.damare.model.ApplicationState;
 import com.damare.model.ControllerUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -46,7 +47,7 @@ public class UpdateUserController {
     }
 
     @FXML
-    protected void onSaveButtonClick() {
+    protected void onSaveButtonClick(ActionEvent event) {
         this.state = getInstance();
         User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
 
@@ -59,7 +60,7 @@ public class UpdateUserController {
             ApplicationState.getInstance().setCurrentlyLoggedUser(user);
 
         }
-
+        ControllerUtils.toHome(event);
 
     }
 

@@ -58,7 +58,7 @@ public class AddTaskController {
 
 
     @FXML
-    protected void onAddButtonClick() {
+    protected void onAddButtonClick(ActionEvent event) {
         this.state = getInstance();
         User currentUser = getInstance().getCurrentlyLoggedUser();
 
@@ -106,6 +106,7 @@ public class AddTaskController {
         );
 
         ControllerUtils.addTask(task);
+        ControllerUtils.toHome(event);
 
     }
 
