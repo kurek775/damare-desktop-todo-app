@@ -49,49 +49,18 @@ public class UsersController {
                     add.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
-/*
-                            List<FriendRequest> requests = ControllerUtils.viewRequesters(currentUser.getId());
-                            Boolean checker = true;
-                            for (FriendRequest fr : requests) {
-                                if ((fr.getRequestedId().equals(user.getId()) && fr.getRequesterId().equals(currentUser.getId())) ||
-                                        (fr.getRequestedId().equals(currentUser.getId()) && fr.getRequesterId().equals(user.getId()))
-                                ) {
-                                    checker = false;
-                                }
-                            }
-                            if (checker) {
-
-
-                            }
-*/
 
                             FriendRequest request = new FriendRequest(null, currentUser.getId(), user.getId(), 0, "send");
                             ControllerUtils.addRequest(request);
-                            loadUsers();
+                            userListView.getItems().remove(user);
                             loadRequesters();
 
                         }
                     });
-                    Boolean disableButton = false;
-                    List<User> friends = ControllerUtils.viewAllFriends(currentUser.getId());
-                   /* List<FriendRequest> requests = ControllerUtils.viewRequesters(currentUser.getId());
-                    for (FriendRequest fr : requests) {
-                        if (fr.getRequestedId().equals(user.getId()) || fr.getRequesterId().equals(user.getId())) {
-                            disableButton = true;
-                        }
-                    }*/
 
-                    for (User usr : friends) {
-                        if (usr.getId().equals(user.getId())) {
-                            disableButton = true;
-                            break;
-                        }
-                    }
-                    if (disableButton) {
-                        setGraphic(new HBox());
-                    } else {
-                        setGraphic(new HBox(add));
-                    }
+
+                    setGraphic(new HBox(add));
+
 
                 } else {
                     setText(null);
@@ -129,8 +98,7 @@ public class UsersController {
                             req.setStatusCode(1);
                             req.setStatusName("accepted");
                             ControllerUtils.updateFriendRequest(req);
-                            loadRequesters();
-                            loadUsers();
+                            requestListView.getItems().remove(req);
                             loadFriends();
                         }
                     });
@@ -141,8 +109,8 @@ public class UsersController {
                         public void handle(ActionEvent event) {
 
                             ControllerUtils.declineRequest(req.getId());
-                            loadRequesters();
-                            loadUsers();
+                            requestListView.getItems().remove(req);
+
                             loadFriends();
                         }
                     });

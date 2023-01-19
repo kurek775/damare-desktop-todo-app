@@ -14,11 +14,11 @@
     <children>
 
         <Text text="All users"/>
-        <ListView fx:id="userListView" minWidth="150.0" minHeight="300" />
+        <ListView fx:id="userListView" minWidth="120.0" minHeight="200" />
         <Text text="Friend requests"/>
-        <ListView fx:id="requestListView" minWidth="150.0" minHeight="300" />
+        <ListView fx:id="requestListView" minWidth="120.0" minHeight="200" />
         <Text text="Friends"/>
-        <ListView fx:id="friendsListView" minWidth="150.0" minHeight="300" />
+        <ListView fx:id="friendsListView" minWidth="120.0" minHeight="200" />
         <Button fx:id="homeBtn"  text="Home" />
 
 
