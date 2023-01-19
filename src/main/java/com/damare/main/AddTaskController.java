@@ -6,7 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import org.w3c.dom.Text;
+import javafx.scene.text.Text;
 
 import java.awt.event.MouseEvent;
 import java.time.ZoneId;
@@ -16,14 +16,14 @@ import static com.damare.model.ApplicationState.getInstance;
 
 public class AddTaskController {
 
+    public Text priorityTex;
     @FXML
     private Button homeBtn;
     @FXML
     private TextField nameField;
     @FXML
     private TextField importanceField;
-    @FXML
-    private TextField Priority;
+
     @FXML
     private TextField durationField;
     @FXML
@@ -36,8 +36,12 @@ public class AddTaskController {
     private DatePicker dateField;
     private ApplicationState state;
 
+
+
     @FXML
-    private Text priorityText;
+    private Slider Prior_new;
+
+
 
 
 
@@ -144,6 +148,8 @@ public class AddTaskController {
     }
 
     public void updateText(javafx.scene.input.MouseEvent mouseEvent) {
+        priorityTex.setText(String.valueOf((int)Prior_new.getValue()));
+        
     }
 }
 

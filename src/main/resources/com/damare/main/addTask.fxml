@@ -20,9 +20,12 @@
          </image>
       </ImageView>
       <Slider fx:id="Prior_new" layoutX="85.0" layoutY="380.0" max="99.0" onMouseReleased="#updateText" prefHeight="14.0" prefWidth="193.0" showTickLabels="true" />
-      <Text fx:id="priorityTex" layoutX="293.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" wrappingWidth="10.0" />
+      <Text fx:id="priorityTex" fontSmoothingType="LCD" layoutX="57.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="1.0" text="00" wrappingWidth="21.0">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font></Text>
         <TextField fx:id="nameField" layoutX="29.0" layoutY="95.0" prefHeight="25.0" prefWidth="298.0" promptText="Add task name" style="-fx-background-color: #f5f5f5;" />
-        <TextField fx:id="Priority" layoutX="392.0" layoutY="384.0" prefHeight="25.0" prefWidth="216.0" />
+        <TextField fx:id="importanceField" layoutX="392.0" layoutY="384.0" prefHeight="25.0" prefWidth="216.0" />
         <Label layoutX="434.0" layoutY="209.0">
          <font>
             <Font name="System Bold" size="9.0" />
