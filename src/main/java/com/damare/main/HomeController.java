@@ -197,7 +197,7 @@ public class HomeController {
     private void lineChart() {
         this.state = getInstance();
         User currentUser = getInstance().getCurrentlyLoggedUser();
-
+        lineChart.getData().clear();
         int[] intArray = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 
