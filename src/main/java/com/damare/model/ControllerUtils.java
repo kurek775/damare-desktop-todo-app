@@ -30,7 +30,6 @@ public class ControllerUtils {
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
         User current = (db.searchUsersById(conn, id));
 
-
         return current;
     }
 
