@@ -69,7 +69,7 @@ public class HomeController {
         this.state = getInstance();
         User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
 
-        loadMyTasks(9999);
+        loadMyTasks(999);
         loadMyCategories();
         lineChart();
 
@@ -92,7 +92,7 @@ public class HomeController {
                         @Override
                         public void handle(ActionEvent event) {
                             ControllerUtils.removeTask(task.getId());
-                            loadMyTasks(9999);
+                            loadMyTasks(999);
                             lineChart();
                         }
                     });
@@ -114,7 +114,7 @@ public class HomeController {
                         @Override
                         public void handle(ActionEvent event) {
                             ControllerUtils.finishTask(task.getId());
-                            loadMyTasks(9999);
+                            loadMyTasks(999);
                         }
                     });
 
@@ -144,8 +144,13 @@ public class HomeController {
                         }
                     });
 
+                    if (category.getId() == 999) {
+                        setGraphic(null);
+                    }
+                    else{
+                        setGraphic(new HBox(delete));
+                    }
 
-                    setGraphic(new HBox(delete));
 
                 } else {
                     setText(null);
@@ -160,7 +165,7 @@ public class HomeController {
         taskListView.getItems().clear();
         this.state = getInstance();
         User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
-        if (id == 9999) {
+        if (id == 999) {
             taskListView.getItems().addAll(ControllerUtils.viewTasks(currentUser.getId()));
         } else {
             for (Task tsk : ControllerUtils.viewTasks(currentUser.getId())) {
@@ -179,6 +184,8 @@ public class HomeController {
         categoryListView.getItems().clear();
         this.state = getInstance();
         User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
+        Category def = new Category(999, "All", "all", currentUser.getId());
+        categoryListView.getItems().add(def);
         categoryListView.getItems().addAll(ControllerUtils.viewCategories(currentUser.getId()));
     }
 
