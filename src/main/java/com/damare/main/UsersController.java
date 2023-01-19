@@ -34,7 +34,7 @@ public class UsersController {
         User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
         homeBtn.setOnAction(ControllerUtils::toHome);
 
-        loadUsers(currentUser);
+        loadUsers();
         loadRequesters();
         loadFriends();
 
@@ -49,17 +49,49 @@ public class UsersController {
                     add.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
+/*
+                            List<FriendRequest> requests = ControllerUtils.viewRequesters(currentUser.getId());
+                            Boolean checker = true;
+                            for (FriendRequest fr : requests) {
+                                if ((fr.getRequestedId().equals(user.getId()) && fr.getRequesterId().equals(currentUser.getId())) ||
+                                        (fr.getRequestedId().equals(currentUser.getId()) && fr.getRequesterId().equals(user.getId()))
+                                ) {
+                                    checker = false;
+                                }
+                            }
+                            if (checker) {
+
+
+                            }
+*/
+
                             FriendRequest request = new FriendRequest(null, currentUser.getId(), user.getId(), 0, "send");
                             ControllerUtils.addRequest(request);
-                            loadUsers(currentUser);
+                            loadUsers();
                             loadRequesters();
-
 
                         }
                     });
+                    Boolean disableButton = false;
+                    List<User> friends = ControllerUtils.viewAllFriends(currentUser.getId());
+                   /* List<FriendRequest> requests = ControllerUtils.viewRequesters(currentUser.getId());
+                    for (FriendRequest fr : requests) {
+                        if (fr.getRequestedId().equals(user.getId()) || fr.getRequesterId().equals(user.getId())) {
+                            disableButton = true;
+                        }
+                    }*/
 
-
-                    setGraphic(new HBox(add));
+                    for (User usr : friends) {
+                        if (usr.getId().equals(user.getId())) {
+                            disableButton = true;
+                            break;
+                        }
+                    }
+                    if (disableButton) {
+                        setGraphic(new HBox());
+                    } else {
+                        setGraphic(new HBox(add));
+                    }
 
                 } else {
                     setText(null);
@@ -98,12 +130,25 @@ public class UsersController {
                             req.setStatusName("accepted");
                             ControllerUtils.updateFriendRequest(req);
                             loadRequesters();
+                            loadUsers();
+                            loadFriends();
+                        }
+                    });
+
+                    Button dec = new Button("DECLINE");
+                    dec.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+
+                            ControllerUtils.declineRequest(req.getId());
+                            loadRequesters();
+                            loadUsers();
                             loadFriends();
                         }
                     });
 
 
-                    setGraphic(new HBox(add));
+                    setGraphic(new HBox(add, dec));
 
                 } else {
                     setText(null);
@@ -115,18 +160,14 @@ public class UsersController {
     }
 
 
-    private void loadUsers(User currentuser) {
+    private void loadUsers() {
 
         userListView.getItems().clear();
-
-        List<User> allusers = ControllerUtils.viewAllUsers();
-        for (User user : allusers) {
-            if (user.getId().equals(currentuser.getId())) {
-                allusers.remove(user);
-            }
-        }
-        userListView.getItems().addAll(allusers);
+        this.state = getInstance();
+        User currentUser = ApplicationState.getInstance().getCurrentlyLoggedUser();
+        userListView.getItems().addAll(ControllerUtils.viewAllUsers(currentUser.getId()));
     }
+
 
     private void loadRequesters() {
         requestListView.getItems().clear();

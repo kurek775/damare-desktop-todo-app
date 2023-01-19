@@ -95,11 +95,11 @@ public class ControllerUtils {
 
     }
 
-    public static List<User> viewAllUsers() {
+    public static List<User> viewAllUsers(Integer id) {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
 
-        return db.readAllUsers(conn);
+        return db.readAllUsers(conn,id);
 
     }
 
@@ -130,6 +130,13 @@ public class ControllerUtils {
         DbFunctions db = new DbFunctions();
         Connection conn = db.connectDb("devel", "postgre", "Damare123");
         return db.readRequesters(conn, id);
+
+    }
+
+    public static void declineRequest(Integer id) {
+        DbFunctions db = new DbFunctions();
+        Connection conn = db.connectDb("devel", "postgre", "Damare123");
+        db.deleteRowByAnything(conn, "devel_friendship","friendship_id",id);
 
     }
 

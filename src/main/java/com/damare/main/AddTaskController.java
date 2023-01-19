@@ -42,6 +42,7 @@ public class AddTaskController {
         loadMyCategories();
         formatComboBox();
 
+
     }
 
     @FXML
@@ -96,14 +97,14 @@ public class AddTaskController {
 
     }
 
-    private void inputVerification(){
-        if(nameField.getText().isEmpty() ){
+    private void inputVerification() {
+        if (nameField.getText().isEmpty()) {
             System.out.println("Name is required.");
         }
-        if(!importanceField.getText().isEmpty() && !importanceField.getText().matches("\\d\\d?")) {
+        if (!importanceField.getText().isEmpty() && !importanceField.getText().matches("\\d\\d?")) {
             System.out.println("Importance has to be a number from 0 to 99.");
         }
-        if(!durationField.getText().isEmpty() && !durationField.getText().matches("\\d\\d?\\d?")) {
+        if (!durationField.getText().isEmpty() && !durationField.getText().matches("\\d\\d?\\d?")) {
             System.out.println("Duration has to be a number from 0 to 999.");
         }
     }
@@ -116,12 +117,13 @@ public class AddTaskController {
     }
 
     private void formatComboBox() {
-        catIdField.setCellFactory(taskListView -> new ListCell<>() {
+        catIdField.setCellFactory(catIdField -> new ListCell<>() {
             @Override
             protected void updateItem(Category category, boolean empty) {
                 super.updateItem(category, empty);
                 if (!empty) {
                     setText(category.getName());
+
                 } else {
                     setText(null);
                     setGraphic(null);
