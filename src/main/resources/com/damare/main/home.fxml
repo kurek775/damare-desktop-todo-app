@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="884.0" prefWidth="922.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.damare.main.HomeController">
+<AnchorPane prefHeight="884.0" prefWidth="922.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.damare.main.HomeController">
    <children>
         <Button fx:id="addTaskBtn" layoutX="175.0" layoutY="841.0" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: e3e3e3; -fx-border-style: solid; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 1;" text="➕ TASK" />
         <Button fx:id="logoutBtn" layoutX="14.0" layoutY="15.0" style="-fx-background-color: F2796B; -fx-border-style: solid; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 1;" text="LOGOUT">
@@ -32,9 +32,9 @@
          </font></Text>
         <ListView fx:id="categoryListView" layoutX="482.0" layoutY="186.0" minHeight="300" minWidth="150.0" prefHeight="644.0" prefWidth="426.0" />
         <Button fx:id="addCategoryBtn" layoutX="649.0" layoutY="841.0" style="-fx-background-color: e3e3e3; -fx-border-style: solid; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 1;" text="➕ CATEGORY" />
-        <Button fx:id="updateUserBtn" layoutX="14.0" layoutY="52.0" style="-fx-background-color: e3e3e3; -fx-border-style: solid; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 1;" text="UPDATE INFO">
+        <Button fx:id="updateUserBtn" layoutX="863.0" layoutY="6.0" prefHeight="36.0" prefWidth="35.0" style="-fx-background-color: white; -fx-border-style: none; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 1;" text="⚙">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Button>
         <Button fx:id="friendsBtn" layoutX="140.0" layoutY="15.0" style="-fx-background-color: e3e3e3; -fx-border-style: solid; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 1;" text="🙋‍♂️" />
