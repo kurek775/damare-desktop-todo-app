@@ -343,13 +343,13 @@ public class DbFunctions {
         return list;
     }
 
-    public List<User> readAllUsers(Connection conn) {
+    public List<User> readAllUsers(Connection conn, Integer id) {
         Statement statement;
         List<User> list = new ArrayList<>();
         ResultSet rs = null;
         try {
 
-            String query = String.format("select * from devel_user");
+            String query = String.format("select * from devel_user where not user_id= %s",id);
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             Integer i = 0;
