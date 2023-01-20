@@ -6,15 +6,20 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import org.json.JSONObject;
 import javafx.scene.Node;
 
+import java.awt.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
@@ -205,7 +210,13 @@ public class ControllerUtils {
         popup.getContent().add(label);
         popup.getContent().add(button);
         label.setMinWidth(180);
-        label.setStyle(" -fx-background-color: red;");
+        label.setStyle(" -fx-background-color: white;");
+        DropShadow drop_shadow = new DropShadow(10, Color.BLACK);
+        label.setMaxWidth(Double.MAX_VALUE);
+        label.setAlignment(Pos.CENTER);
+
+       
+        label.setEffect(drop_shadow);
         label.setMinHeight(180);
         popup.show(stage);
     }
