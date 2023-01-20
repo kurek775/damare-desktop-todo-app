@@ -176,13 +176,13 @@ public class ControllerUtils {
         User usr = (db.searchByNameOrMail(conn, lname));
         if (usr.getId() == null) {
 
-            showPopup(stage, "Uživatel nebyl nalezen");
+            showPopup(stage, "User not found.");
         } else {
             if (checkPassword(password, usr.getPassword())) {
                 return usr;
 
             } else {
-                showPopup(stage, "Špatně zadané heslo");
+                showPopup(stage, "Wrong password.");
             }
 
         }
@@ -228,7 +228,7 @@ public class ControllerUtils {
             System.out.println("Toto jmeno je volne");
             return false;
         } else {
-            showPopup(stage, "Toto jmeno jiz nekdo vyuziva");
+            showPopup(stage, "This username is already taken.");
             return true;
         }
     }
@@ -240,7 +240,7 @@ public class ControllerUtils {
             System.out.println("Tento email je volny");
             return false;
         } else {
-            showPopup(stage, "Tento email jiz nekdo vyuziva");
+            showPopup(stage, "This e-mail is already taken.");
             return true;
         }
     }
@@ -265,7 +265,7 @@ public class ControllerUtils {
 
         if (password.length() < 8) {
 
-            showPopup(stage, "Heslo musí mít minimálně 8 znaků");
+            showPopup(stage, "Password has to be at least 8 characters long.");
             return true;
         } else {
 
@@ -281,7 +281,7 @@ public class ControllerUtils {
                     hasLow = true;
                 }
                 if (hasCap && hasLow && hasNum) {
-                    System.out.println("Heslo je v pořádku");
+                    System.out.println("Password ok.");
                     return false;
                 }
             }
