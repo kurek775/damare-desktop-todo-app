@@ -39,7 +39,7 @@ public class LoginController {
         registerBtn.setOnAction(ControllerUtils::toRegister);
         loginBtn.setOnAction(e -> {
             User usr = ControllerUtils.loginUser(unameEmailField.getText(), passwordField.getText(), (Stage) loginBtn.getScene().getWindow());
-            if (usr.getId() != null) {
+            if (usr != null) {
                 ApplicationState.getInstance().setCurrentlyLoggedUser(usr);
                 ControllerUtils.toHome(e);
             }

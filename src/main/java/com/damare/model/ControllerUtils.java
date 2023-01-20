@@ -181,7 +181,7 @@ public class ControllerUtils {
             }
 
         }
-        return usr;
+        return null;
     }
 
     public static boolean checkPassword(String password, String passwordDb) {
