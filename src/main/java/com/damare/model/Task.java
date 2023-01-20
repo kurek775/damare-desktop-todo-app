@@ -11,7 +11,7 @@ public class Task {
     private Integer duration;
     private String name;
     private String place;
-    private String note;
+
     private String description;
     private Date date;
     private Boolean status;
@@ -19,7 +19,7 @@ public class Task {
     public Task(Integer id, Integer catId,
                 Integer userId, Integer importance,
                 Integer duration, String name,
-                String place, String note,
+                String place, 
                 String description, Date date,
                 Boolean status) {
         this.id = id;
@@ -29,12 +29,14 @@ public class Task {
         this.duration = duration;
         this.name = name;
         this.place = place;
-        this.note = note;
+
         this.description = description;
         this.date = date;
         this.status = status;
     }
-
+    public Integer getId() {
+        return id;
+    }
     public Integer getCatId() {
         return catId;
     }
@@ -83,13 +85,6 @@ public class Task {
         this.place = place;
     }
 
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
 
     public String getDescription() {
         return description;
@@ -113,5 +108,10 @@ public class Task {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

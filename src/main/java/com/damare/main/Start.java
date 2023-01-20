@@ -11,17 +11,13 @@ public class Start extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-
-
-
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("login.fxml"));
         fxmlLoader.load();
         Scene scene = new Scene(fxmlLoader.getRoot());
         stage.setScene(scene);
-        stage.setTitle("login");
+        stage.setTitle("DAMARE");
         stage.show();
-
 
     }
 

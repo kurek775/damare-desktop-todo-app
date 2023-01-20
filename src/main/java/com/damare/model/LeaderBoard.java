@@ -1,21 +1,19 @@
 package com.damare.model;
 
-import java.util.List;
-
-public class User {
+public class LeaderBoard {
     private Integer id;
     private String name;
 
     private String email;
-    private String password;
+    private Integer taskCompletedCount;
 
 
 
-    public User(Integer id, String name, String email, String password) {
+    public LeaderBoard(Integer id, String name, String email, Integer taskCompletedCount) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.taskCompletedCount = taskCompletedCount;
 
     }
 
@@ -39,13 +37,15 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getTaskCompletedCount() {
+        return taskCompletedCount;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setTaskCompletedCount(Integer taskCompletedCount) {
+        this.taskCompletedCount = taskCompletedCount;
     }
+
+    public String getUserWithCount() {return "Score: " + taskCompletedCount + " - " + name;}
 
 
 }
