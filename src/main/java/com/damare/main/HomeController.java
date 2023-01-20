@@ -187,6 +187,7 @@ public class HomeController {
         Category def = new Category(999, "All", "all", currentUser.getId());
         categoryListView.getItems().add(def);
         categoryListView.getItems().addAll(ControllerUtils.viewCategories(currentUser.getId()));
+        lineChart();
     }
 
     public void clickOnLoadedTask(MouseEvent mouseEvent) {
@@ -205,6 +206,7 @@ public class HomeController {
         this.state = getInstance();
         Category clicked = categoryListView.getSelectionModel().getSelectedItem();
         loadMyTasks(clicked.getId());
+        lineChart();
         if (clicked == null) return;
 
 
