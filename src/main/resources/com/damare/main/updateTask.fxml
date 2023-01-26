@@ -4,13 +4,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="587.0" prefWidth="473.0" spacing="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.damare.main.UpdateTaskController">
+<VBox alignment="CENTER" prefHeight="587.0" prefWidth="602.0" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.damare.main.UpdateTaskController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
     <children>
         <Label text="name" />
-        <TextField fx:id="nameField" />
+        <TextField fx:id="nameField" prefHeight="25.0" prefWidth="374.0" />
         <Label text="importance" />
         <TextField fx:id="importanceField" />
         <Label text="duration" />
@@ -24,7 +24,7 @@
         <Label text="date" />
         <DatePicker fx:id="dateField" />
         <Button fx:id="saveBtn" onAction="#onSaveButtonClick" text="Save" />
-        <Button fx:id="homeBtn"  text="Home" />
+        <Button fx:id="homeBtn" text="Home" />
 
     </children>
     <padding>
