@@ -1,15 +1,12 @@
 package com.damare.model;
 
 import com.damare.data.DbFunctions;
+import org.testng.annotations.Test;
 
-import org.junit.jupiter.api.Test;
 import java.sql.Connection;
-
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.testng.Assert.assertFalse;
 
 class ControllerUtilsTest {
 

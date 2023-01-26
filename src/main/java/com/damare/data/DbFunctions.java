@@ -1,11 +1,10 @@
 package com.damare.data;
 
+import com.damare.model.*;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.damare.model.*;
-import org.json.JSONObject;
 
 public class DbFunctions {
     Connection conn = null;
@@ -24,6 +23,10 @@ public class DbFunctions {
                 System.out.println(e);
             }
         }
+        return conn;
+    }
+
+    public Connection getConn(Connection conn) {
         return conn;
     }
 

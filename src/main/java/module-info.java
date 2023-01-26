@@ -13,6 +13,7 @@ module com.damare{
     requires com.google.api.client.extensions.jetty.auth;
     requires com.google.api.client.extensions.java6.auth;
     requires java.desktop;
+    requires org.testng;
 
 
     opens com.damare.main to javafx.fxml;
